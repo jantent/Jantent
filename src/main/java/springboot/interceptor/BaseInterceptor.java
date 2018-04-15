@@ -36,6 +36,7 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Autowired
     private AdminCommons adminCommons;
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();

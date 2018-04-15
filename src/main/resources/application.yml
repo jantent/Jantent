@@ -1,9 +1,5 @@
 server:
-  port: 8443
-  ssl:
-    key-store: classpath:keystore.jks
-    key-store-password: 123456
-    key-store-type: JKS
+  port: 80
 spring:
   profiles:
     active: jdbc
@@ -55,3 +51,9 @@ author:
 httpportcfg:
   http_port: 8080
   https_port: 8443
+
+# Nettyserver 配置
+nettyserver:
+  serviceIp: 0.0.0.0
+  servicePort: 3460
+
