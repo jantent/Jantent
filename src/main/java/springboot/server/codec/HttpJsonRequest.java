@@ -1,4 +1,4 @@
-package springboot.server.handler.codec;
+package springboot.server.codec;
 
 import io.netty.handler.codec.http.FullHttpRequest;
 

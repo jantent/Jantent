@@ -1,4 +1,4 @@
-package springboot.server.handler.codec;
+package springboot.server.codec;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class HttpJsonRequestDecoder extends AbstractHttpJsonDecoder<FullHttpRequest>{
 
-    protected HttpJsonRequestDecoder(Class<?> clazz) {
+    public HttpJsonRequestDecoder(Class<?> clazz) {
         super(clazz);
     }
 

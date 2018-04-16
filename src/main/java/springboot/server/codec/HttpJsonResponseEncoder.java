@@ -1,4 +1,4 @@
-package springboot.server.handler.codec;
+package springboot.server.codec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

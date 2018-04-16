@@ -5,9 +5,10 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
+import springboot.modal.vo.UserVo;
 import springboot.server.handler.HttpServerHandler;
-import springboot.server.handler.codec.HttpJsonRequestDecoder;
-import springboot.server.handler.codec.HttpJsonResponseEncoder;
+import springboot.server.codec.HttpJsonRequestDecoder;
+import springboot.server.codec.HttpJsonResponseEncoder;
 
 /**
  * @author tangj
@@ -30,7 +31,7 @@ public class HttpNettyServerInitializer extends ChannelInitializer<SocketChannel
     protected void initChannel(SocketChannel ch) throws Exception {
         ch.pipeline().addLast("http-decoder",new HttpRequestDecoder());
         ch.pipeline().addLast("http-aggregator",new HttpObjectAggregator(65336));
-        ch.pipeline().addLast("json-decoder",new HttpJsonRequestDecoder());
+        ch.pipeline().addLast("json-decoder",new HttpJsonRequestDecoder(UserVo.class));
 
         ch.pipeline().addLast("http-encoder",new HttpResponseEncoder());
         ch.pipeline().addLast("json-encoder",new HttpJsonResponseEncoder());

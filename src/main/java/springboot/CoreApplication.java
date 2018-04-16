@@ -23,6 +23,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import springboot.config.HttpPortCfg;
 import springboot.config.NettyServerConfig;
+import springboot.server.HttpNettyServer;
 import springboot.server.TcpNettyServer;
 
 import javax.annotation.Resource;
@@ -51,6 +52,8 @@ public class CoreApplication {
         int port = 3460;
         TcpNettyServer nettyServer = new TcpNettyServer(nettyIp,port);
         nettyServer.startServer();
+
+        HttpNettyServer.getInstance().start();
     }
 
 
