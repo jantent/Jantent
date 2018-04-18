@@ -1,4 +1,4 @@
-package springboot.server;
+package springboot.server.handler;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
