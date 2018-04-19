@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<ol class="page-navigator" th:fragment="pageNav(pageInfo, prevText, nextText, prefix)">
+<ol class="am-pagination" th:fragment="pageNav(pageInfo, prevText, nextText, prefix)">
     <th:block th:if="${pageInfo.hasPreviousPage}">
-        <li class="prev"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.prePage}}" th:text="${prevText}"></a></li>
+        <li class="am-pagination-prev"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.prePage}}" th:text="${prevText}"></a></li>
     </th:block>
 
 
@@ -14,7 +14,7 @@
 
 
     <th:block th:if="${pageInfo.hasNextPage}">
-        <li class="next"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.nextPage}}" th:text="${nextText}"></a></li>
+        <li class="am-pagination-next"><a th:href="@{'/'+${prefix}+'/'+${pageInfo.nextPage}}" th:text="${nextText}"></a></li>
     </th:block>
 
 </ol>

@@ -29,7 +29,7 @@ public class Commons {
 
      private static ISiteService siteService;
 
-     public static String THEME = "themes/default";
+     public static String THEME = "themes/jantent";
 
      private static final List EMPTY = new ArrayList(0);
 

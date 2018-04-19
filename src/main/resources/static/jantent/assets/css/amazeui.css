@@ -31,7 +31,7 @@ html {
   /* 1 */
 }
 /**
- * Remove default margin.
+ * Remove jantent margin.
  */
 body {
   margin: 0;
@@ -303,7 +303,7 @@ input[type="checkbox"] {
   /* 3 */
 }
 /**
- * Re-set default cursor for disabled elements.
+ * Re-set jantent cursor for disabled elements.
  */
 button[disabled],
 html input[disabled] {
@@ -320,7 +320,7 @@ input::-moz-focus-inner {
 /**
  * Fix the cursor style for Chrome's increment/decrement buttons. For certain
  * `font-size` values of the `input`, it causes the cursor style of the
- * decrement button to change from `default` to `text`.
+ * decrement button to change from `jantent` to `text`.
  */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -347,7 +347,7 @@ input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 /**
- * 1. Remove default vertical scrollbar in IE 8/9.
+ * 1. Remove jantent vertical scrollbar in IE 8/9.
  * 2. Improve readability and alignment in all browsers.
  */
 textarea {
@@ -359,7 +359,7 @@ textarea {
 }
 /**
  * Don't inherit the `font-weight` (applied by a rule above).
- * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ * NOTE: the jantent cannot safely be changed in Chrome and Safari on OS X.
  */
 optgroup {
   font-weight: bold;
@@ -591,7 +591,7 @@ iframe {
    ========================================================================== */
 /**
   * Vertical alignment
-  * Exclude `radio` and `checkbox` elements because the default `baseline` value aligns better with text
+  * Exclude `radio` and `checkbox` elements because the jantent `baseline` value aligns better with text
   */
 button,
 input:not([type="radio"]):not([type="checkbox"]),
@@ -4651,7 +4651,7 @@ a.am-close:hover {
   /**
    * Hover
    * 1. Apply hover style also to focus state
-   * 2. Remove default focus style
+   * 2. Remove jantent focus style
    */
   /* Active */
 }
@@ -10817,7 +10817,7 @@ tbody.am-collapse.am-in {
   font-size: 1.4rem;
 }
 /**
-  * Accordion Theme: default
+  * Accordion Theme: jantent
   * Author: Minwe (minwe@yunshipei.com)
   */
 .am-accordion-default {
@@ -11044,7 +11044,7 @@ tbody.am-collapse.am-in {
   clear: both;
 }
 /**
-  * Divider Theme: default
+  * Divider Theme: jantent
   */
 .am-divider-default {
   border-top: 1px solid #dddddd;
@@ -11159,7 +11159,7 @@ tbody.am-collapse.am-in {
   padding-bottom: 10px;
 }
 /**
-  * Footer Theme: default
+  * Footer Theme: jantent
   */
 .am-footer-default {
   background-color: #ffffff;
@@ -11256,7 +11256,7 @@ tbody.am-collapse.am-in {
   cursor: pointer;
 }
 /**
-  * Gallery Theme: default
+  * Gallery Theme: jantent
   * Author: Minwe (minwe@yunshipei.com)
   */
 .am-gallery-default > li {
@@ -11430,7 +11430,7 @@ tbody.am-collapse.am-in {
   text-decoration: none;
 }
 /**
-  * Gotop Theme: default
+  * Gotop Theme: jantent
   */
 .am-gotop-default {
   text-align: center;
@@ -11571,7 +11571,7 @@ tbody.am-collapse.am-in {
   padding-top: 49px;
 }
 /**
-  * Header Theme: default
+  * Header Theme: jantent
   */
 .am-header-default {
   background-color: #0e90d2;
@@ -11681,7 +11681,7 @@ tbody.am-collapse.am-in {
   font-size: 14px;
 }
 /**
-  * Intro Theme: default
+  * Intro Theme: jantent
   */
 .am-intro-default .am-intro-hd {
   background-color: #0e90d2;
@@ -11811,7 +11811,7 @@ tbody.am-collapse.am-in {
   border-top: none;
 }
 /**
-  * list_news Theme: default
+  * list_news Theme: jantent
   */
 .am-list-news-default {
   margin: 10px;
@@ -12155,7 +12155,7 @@ tbody.am-collapse.am-in {
   height: 300px;
 }
 /**
-  * Accordion Theme: default
+  * Accordion Theme: jantent
   * Author: Hzp (hzp@yunshipei.com)
   */
 .am-map-default #bd-map {
@@ -12227,7 +12227,7 @@ tbody.am-collapse.am-in {
           transition: all 0.45s;
 }
 /**
-  * Menu Theme: default
+  * Menu Theme: jantent
   * Author: Minwe (minwe@yunshipei.com)
   */
 .am-menu-default .am-menu-nav {
@@ -13127,7 +13127,7 @@ tbody.am-collapse.am-in {
   padding-bottom: 54px;
 }
 /**
-  * Navbar Theme: default
+  * Navbar Theme: jantent
   * Author: hzp (hzp@yunshipei.com)
   */
 .am-navbar-default a {
@@ -13162,7 +13162,7 @@ tbody.am-collapse.am-in {
   position: relative;
 }
 /**
-  * Pagination Theme: default
+  * Pagination Theme: jantent
   */
 .am-pagination-default {
   margin-left: 10px;
@@ -13297,7 +13297,7 @@ tbody.am-collapse.am-in {
   font-size: 1.4rem;
 }
 /**
-  * Paragraph Theme: default
+  * Paragraph Theme: jantent
   */
 .am-paragraph-default {
   margin: 0 10px;
@@ -14751,7 +14751,7 @@ tbody.am-collapse.am-in {
   overflow: hidden;
 }
 /**
-  * Tabs Theme: default
+  * Tabs Theme: jantent
   */
 .am-tabs-default .am-tabs-nav {
   line-height: 40px;
@@ -14854,7 +14854,7 @@ tbody.am-collapse.am-in {
   width: auto;
 }
 /**
-  * Titlebar Theme: default
+  * Titlebar Theme: jantent
   */
 .am-titlebar-default {
   display: -webkit-box;

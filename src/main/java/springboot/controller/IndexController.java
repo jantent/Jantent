@@ -59,12 +59,12 @@ public class IndexController extends BaseController {
     private ISiteService siteService;
 
     @GetMapping(value = "/")
-    private String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "12") int limit) {
+    private String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "4") int limit) {
         return this.index(request, 1, limit);
     }
 
     @GetMapping(value = "page/{p}")
-    public String index(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "12") int limit) {
+    public String index(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "4") int limit) {
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
         PageInfo<ContentVo> articles = contentService.getContents(p, limit);
         request.setAttribute("articles", articles);

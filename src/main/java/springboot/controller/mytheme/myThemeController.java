@@ -25,6 +25,6 @@ public class myThemeController extends BaseController{
 
     @GetMapping("")
     public String index(HttpServletRequest request){
-        return "jantent/index";
+        return "jantent/lwindex";
     }
 }

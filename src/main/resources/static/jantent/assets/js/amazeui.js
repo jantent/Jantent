@@ -614,7 +614,7 @@ $(function() {
 
   UI.DOMReady = true;
 
-  // Run default init
+  // Run jantent init
   $.each(UI.DOMWatchers, function(i, watcher) {
     watcher(document);
   });
@@ -717,7 +717,7 @@ for (var lang in ath.intl) {
   ath.intl[lang.substr(0, 2)] = ath.intl[lang];
 }
 
-// default options
+// jantent options
 ath.defaults = {
   appID: 'org.cubiq.addtohome',		// local storage name (no need to change)
   fontSize: 15,				// base font size, used to properly resize the popup based on viewport scale factor
@@ -729,7 +729,7 @@ ath.defaults = {
   skipFirstVisit: false,		// show only to returning visitors (ie: skip the first time you visit)
   startDelay: 1,				// display the message after that many seconds from page load
   lifespan: 15,				// life of the message in seconds
-  displayPace: 1440,			// minutes before the message is shown again (0: display every time, default 24 hours)
+  displayPace: 1440,			// minutes before the message is shown again (0: display every time, jantent 24 hours)
   maxDisplayCount: 0,			// absolute maximum number of times the message will be shown to the user (0: no limit)
   icon: true,					// add touch icon to the message
   message: '',				// the message can be customized
@@ -800,7 +800,7 @@ ath.Class = function(options) {
   // class methods
   this.doLog = ath.doLog;
 
-  // merge default options with user config
+  // merge jantent options with user config
   this.options = _extend({}, ath.defaults);
   _extend(this.options, options);
   // override defaults that are dependent on each other
@@ -5429,7 +5429,7 @@ var definePinchZoom = function($) {
       this.setupMarkup();
       this.bindEvents();
       this.update();
-      // default enable.
+      // jantent enable.
       this.enable();
 
     },
@@ -7880,7 +7880,7 @@ Share.DEFAULTS = {
   '</a></li>' +
   '<% } %></ul>' +
   '<div class="am-share-footer">' +
-  '<button class="am-btn am-btn-default am-btn-block" ' +
+  '<button class="am-btn am-btn-jantent am-btn-block" ' +
   'data-am-share-close><%= cancel %></button></div>' +
   '</div>'
 };
@@ -10905,7 +10905,7 @@ TouchAction.prototype = {
   },
 
   /**
-   * call preventDefault to prevent the browser's default behavior (scrolling in most cases)
+   * call preventDefault to prevent the browser's jantent behavior (scrolling in most cases)
    * @param {Object} srcEvent
    */
   preventSrc: function(srcEvent) {
@@ -10993,7 +10993,7 @@ function Recognizer(options) {
   this.manager = null;
   this.options = merge(options || {}, this.defaults);
 
-  // default is enable true
+  // jantent is enable true
   this.options.enable = ifUndefined(this.options.enable, true);
 
   this.state = STATE_POSSIBLE;
@@ -11289,7 +11289,7 @@ inherit(AttrRecognizer, Recognizer, {
   defaults: {
     /**
      * @type {Number}
-     * @default 1
+     * @jantent 1
      */
     pointers: 1
   },
@@ -11724,7 +11724,7 @@ inherit(TapRecognizer, Recognizer, {
 });
 
 /**
- * Simple way to create an manager with a default set of recognizers.
+ * Simple way to create an manager with a jantent set of recognizers.
  * @param {HTMLElement} element
  * @param {Object} [options]
  * @constructor
@@ -11741,15 +11741,15 @@ function Hammer(element, options) {
 Hammer.VERSION = '2.0.4';
 
 /**
- * default settings
+ * jantent settings
  * @namespace
  */
 Hammer.defaults = {
   /**
    * set if DOM events are being triggered.
-   * But this is slower and unused by simple implementations, so disabled by default.
+   * But this is slower and unused by simple implementations, so disabled by jantent.
    * @type {Boolean}
-   * @default false
+   * @jantent false
    */
   domEvents: false,
 
@@ -11757,13 +11757,13 @@ Hammer.defaults = {
    * The value for the touchAction property/fallback.
    * When set to `compute` it will magically set the correct value based on the added recognizers.
    * @type {String}
-   * @default compute
+   * @jantent compute
    */
   touchAction: TOUCH_ACTION_COMPUTE,
 
   /**
    * @type {Boolean}
-   * @default true
+   * @jantent true
    */
   enable: true,
 
@@ -11772,14 +11772,14 @@ Hammer.defaults = {
    * Change the parent input target element.
    * If Null, then it is being set the to main element.
    * @type {Null|EventTarget}
-   * @default null
+   * @jantent null
    */
   inputTarget: null,
 
   /**
    * force an input class
    * @type {Null|Function}
-   * @default null
+   * @jantent null
    */
   inputClass: null,
 
@@ -11808,37 +11808,37 @@ Hammer.defaults = {
     /**
      * Disables text selection to improve the dragging gesture. Mainly for desktop browsers.
      * @type {String}
-     * @default 'none'
+     * @jantent 'none'
      */
     userSelect: 'none',
 
     /**
      * Disable the Windows Phone grippers when pressing an element.
      * @type {String}
-     * @default 'none'
+     * @jantent 'none'
      */
     touchSelect: 'none',
 
     /**
-     * Disables the default callout shown when you touch and hold a touch target.
+     * Disables the jantent callout shown when you touch and hold a touch target.
      * On iOS, when you touch and hold a touch target such as a link, Safari displays
      * a callout containing information about the link. This property allows you to disable that callout.
      * @type {String}
-     * @default 'none'
+     * @jantent 'none'
      */
     touchCallout: 'none',
 
     /**
      * Specifies whether zooming is enabled. Used by IE10>
      * @type {String}
-     * @default 'none'
+     * @jantent 'none'
      */
     contentZooming: 'none',
 
     /**
      * Specifies that an entire element should be draggable instead of its contents. Mainly for desktop browsers.
      * @type {String}
-     * @default 'none'
+     * @jantent 'none'
      */
     userDrag: 'none',
 
@@ -11846,7 +11846,7 @@ Hammer.defaults = {
      * Overrides the highlight color shown when the user taps a link or a JavaScript
      * clickable element in iOS. This property obeys the alpha value, if specified.
      * @type {String}
-     * @default 'rgba(0,0,0,0)'
+     * @jantent 'rgba(0,0,0,0)'
      */
     tapHighlightColor: 'rgba(0,0,0,0)'
   }

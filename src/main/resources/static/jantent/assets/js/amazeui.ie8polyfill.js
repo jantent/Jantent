@@ -1604,7 +1604,7 @@ if (!Date.parse || doesNotParseY2KNewYear || acceptsInvalidDates || !supportsExt
             var match = isoDateExpression.exec(string);
             if (match) {
                 // parse months, days, hours, minutes, seconds, and milliseconds
-                // provide default values if necessary
+                // provide jantent values if necessary
                 // parse the UTC offset component
                 var year = Number(match[1]),
                     month = Number(match[2] || 1) - 1,
@@ -2196,7 +2196,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
         //as long as one or the other is enabled; but if both are enabled
         //it prefers ActiveX, which means it still works with local files
         //(Native XHR in IE7/8 is blocked and throws "access is denied",
-        // but ActiveX is permitted if the user allows it [default is to prompt])
+        // but ActiveX is permitted if the user allows it [jantent is to prompt])
         var xhr = window.ActiveXObject ? ( new ActiveXObject('Microsoft.XMLHTTP') || new ActiveXObject('Msxml2.XMLHTTP') ) : new XMLHttpRequest();
 
         xhr.open( 'GET', url, true );

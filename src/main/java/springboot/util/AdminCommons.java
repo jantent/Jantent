@@ -31,7 +31,7 @@ public final class AdminCommons {
         return false;
     }
 
-    private static final String[] COLORS = {"default", "primary", "success", "info", "warning", "danger", "inverse", "purple", "pink"};
+    private static final String[] COLORS = {"jantent", "primary", "success", "info", "warning", "danger", "inverse", "purple", "pink"};
 
     public static String rand_color() {
         int r = Tools.rand(0, COLORS.length - 1);
