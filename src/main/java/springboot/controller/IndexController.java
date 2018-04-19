@@ -217,10 +217,11 @@ public class IndexController extends BaseController {
             return this.render_404();
         }
         PageInfo<ContentVo> contentsPaginator = contentService.getArticles(metaDto.getMid(), page, limit);
-        request.setAttribute("article", contentsPaginator);
+        request.setAttribute("articles", contentsPaginator);
         request.setAttribute("meta", metaDto);
         request.setAttribute("type", "分类");
         request.setAttribute("keyword", keyword);
+
         return this.render("page-category");
     }
 

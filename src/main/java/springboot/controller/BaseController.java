@@ -7,6 +7,8 @@ import springboot.util.MyUtils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 抽象类controller
+ * 用于统一渲染页面url，页面名称，获取session中的用户
  * @author tangj
  * @date 2018/1/21 11:25
  */

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * web常量
+ *
  * @author tangj
  */
 @Component

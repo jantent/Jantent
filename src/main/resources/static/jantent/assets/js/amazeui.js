@@ -2290,10 +2290,10 @@ var DPGlobal = {
   headTemplate: '<thead>' +
   '<tr class="am-datepicker-header">' +
   '<th class="am-datepicker-prev">' +
-  '<i class="am-datepicker-prev-icon"></i></th>' +
+  '<img class="am-datepicker-prev-icon"></img></th>' +
   '<th colspan="5" class="am-datepicker-switch">' +
   '<div class="am-datepicker-select"></div></th>' +
-  '<th class="am-datepicker-next"><i class="am-datepicker-next-icon"></i>' +
+  '<th class="am-datepicker-next"><img class="am-datepicker-next-icon"></img>' +
   '</th></tr></thead>',
 
   contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'
@@ -2613,8 +2613,8 @@ Dropdown.prototype.events = function() {
     this.toggle();
   }, this));
 
-  /*for (var i = triggers.length; i--;) {
-   var trigger = triggers[i];
+  /*for (var img = triggers.length; img--;) {
+   var trigger = triggers[img];
 
    if (trigger === 'click') {
    $toggle.on('click.' + eventNS, $.proxy(this.toggle, this))
@@ -2665,7 +2665,7 @@ var $ = (window.jQuery);
 var UI = _dereq_(2);
 
 // MODIFIED:
-// - LINE 226: add `<i></i>`
+// - LINE 226: add `<img></img>`
 // - namespace
 // - Init code
 // TODO: start after x ms when pause on actions
@@ -2904,7 +2904,7 @@ $.flexslider = function(el, options) {
               if ('' != captn && undefined != captn) {item += '<span class="' + namespace + 'caption">' + captn + '</span>'};
             }
             // slider.controlNavScaffold.append('<li>' + item + '</li>');
-            slider.controlNavScaffold.append('<li>' + item + '<i></i></li>');
+            slider.controlNavScaffold.append('<li>' + item + '<img></img></li>');
             j++;
           }
         }
@@ -7543,8 +7543,8 @@ Selected.DEFAULTS = {
   '<%= dropUp ? \'am-dropdown-up\': \'\' %>" id="<%= id %>" data-am-dropdown>' +
   '  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle">' +
   '    <span class="am-selected-status am-fl"></span>' +
-  '    <i class="am-selected-icon am-icon-caret-' +
-  '<%= dropUp ? \'up\' : \'down\' %>"></i>' +
+  '    <img class="am-selected-icon am-icon-caret-' +
+  '<%= dropUp ? \'up\' : \'down\' %>"></img>' +
   '  </button>' +
   '  <div class="am-selected-content am-dropdown-content">' +
   '    <h2 class="am-selected-header">' +
@@ -7555,8 +7555,8 @@ Selected.DEFAULTS = {
   '   </div>' +
   '   <% } %>' +
   '    <ul class="am-selected-list">' +
-  '      <% for (var i = 0; i < options.length; i++) { %>' +
-  '       <% var option = options[i] %>' +
+  '      <% for (var img = 0; img < options.length; img++) { %>' +
+  '       <% var option = options[img] %>' +
   '       <% if (option.header) { %>' +
   '  <li data-group="<%= option.group %>" class="am-selected-list-header">' +
   '       <%= option.text %></li>' +
@@ -7566,15 +7566,15 @@ Selected.DEFAULTS = {
   '         data-group="<%= option.group || 0 %>" ' +
   '         data-value="<%= option.value %>" >' +
   '         <span class="am-selected-text"><%= option.text %></span>' +
-  '         <i class="am-icon-check"></i></li>' +
+  '         <img class="am-icon-check"></img></li>' +
   '      <% } %>' +
   '      <% } %>' +
   '    </ul>' +
   '    <div class="am-selected-hint"></div>' +
   '  </div>' +
   '</div>',
-  listTpl:   '<% for (var i = 0; i < options.length; i++) { %>' +
-  '       <% var option = options[i] %>' +
+  listTpl:   '<% for (var img = 0; img < options.length; img++) { %>' +
+  '       <% var option = options[img] %>' +
   '       <% if (option.header) { %>' +
   '  <li data-group="<%= option.group %>" class="am-selected-list-header">' +
   '       <%= option.text %></li>' +
@@ -7584,7 +7584,7 @@ Selected.DEFAULTS = {
   '         data-group="<%= option.group || 0 %>" ' +
   '         data-value="<%= option.value %>" >' +
   '         <span class="am-selected-text"><%= option.text %></span>' +
-  '         <i class="am-icon-check"></i></li>' +
+  '         <img class="am-icon-check"></img></li>' +
   '      <% } %>' +
   '      <% } %>'
 };
@@ -7871,12 +7871,12 @@ Share.DEFAULTS = {
   tpl: '<div class="am-share am-modal-actions" id="<%= id %>">' +
   '<h3 class="am-share-title"><%= title %></h3>' +
   '<ul class="am-share-sns am-avg-sm-3">' +
-  '<% for(var i = 0; i < sns.length; i++) {%>' +
+  '<% for(var img = 0; img < sns.length; img++) {%>' +
   '<li>' +
-  '<a href="<%= sns[i].shareUrl %>" ' +
-  'data-am-share-to="<%= sns[i].id %>" >' +
-  '<i class="am-icon-<%= sns[i].icon %>"></i>' +
-  '<span><%= sns[i].title %></span>' +
+  '<a href="<%= sns[img].shareUrl %>" ' +
+  'data-am-share-to="<%= sns[img].id %>" >' +
+  '<img class="am-icon-<%= sns[img].icon %>"></img>' +
+  '<span><%= sns[img].title %></span>' +
   '</a></li>' +
   '<% } %></ul>' +
   '<div class="am-share-footer">' +
@@ -8809,9 +8809,9 @@ UCheck.DEFAULTS = {
   checkboxClass: 'am-ucheck-checkbox',
   radioClass: 'am-ucheck-radio',
   checkboxTpl: '<span class="am-ucheck-icons">' +
-  '<i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span>',
+  '<img class="am-icon-unchecked"></img><img class="am-icon-checked"></img></span>',
   radioTpl: '<span class="am-ucheck-icons">' +
-  '<i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span>'
+  '<img class="am-icon-unchecked"></img><img class="am-icon-checked"></img></span>'
 };
 
 UCheck.prototype.init = function() {

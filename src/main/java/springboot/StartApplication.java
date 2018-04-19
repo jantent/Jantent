@@ -33,7 +33,7 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @ComponentScan
 @MapperScan("springboot.dao")
-public class CoreApplication {
+public class StartApplication {
 
     @Resource
     private HttpPortCfg httpPortCfg;
@@ -44,7 +44,7 @@ public class CoreApplication {
     public static void main(String[] args) throws Exception{
 
 
-        SpringApplication app = new SpringApplication(CoreApplication.class);
+        SpringApplication app = new SpringApplication(StartApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
 
