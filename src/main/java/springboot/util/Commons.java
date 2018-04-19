@@ -13,10 +13,7 @@ import springboot.service.ISiteService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -301,7 +298,7 @@ public class Commons {
      */
     public static String show_thumb(ContentVo contents) {
         int cid = contents.getCid();
-        int size = cid % 34;
+        int size = cid % 33;
         size = size == 0 ? 1 : size;
         return "/user/img/rand/" + size + ".jpg";
     }
