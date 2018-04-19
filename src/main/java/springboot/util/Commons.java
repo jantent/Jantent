@@ -233,7 +233,7 @@ public class Commons {
             String[] arr = categories.split(",");
             StringBuffer sbuf = new StringBuffer();
             for (String c : arr) {
-                sbuf.append("<a href=\"/category/" + URLEncoder.encode(c, "UTF-8") + "\">" + c + "</a>");
+                sbuf.append("<a class=\"blog-color\" href=\"/category/" + URLEncoder.encode(c, "UTF-8") + "\">" + c + "</a>");
             }
             return sbuf.toString();
         }
@@ -261,11 +261,12 @@ public class Commons {
     /**
      * 截取文章摘要
      *
-     * @param value 文章内容
+     * @param article 文章
      * @param len   要截取文字的个数
      * @return
      */
-    public static String intro(String value, int len) {
+    public static String intro(ContentVo article, int len) {
+        String value = article.getContent();
         int pos = value.indexOf("<!--more-->");
         if (pos != -1) {
             String html = value.substring(0, pos);
@@ -300,7 +301,7 @@ public class Commons {
      */
     public static String show_thumb(ContentVo contents) {
         int cid = contents.getCid();
-        int size = cid % 20;
+        int size = cid % 34;
         size = size == 0 ? 1 : size;
         return "/user/img/rand/" + size + ".jpg";
     }
