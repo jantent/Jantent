@@ -29,9 +29,11 @@ public class OptionServiceImpl implements IOptionService {
     public void insertOption(String name, String value) {
         LOGGER.debug("Enter insertOption method:name={},value={}", name, value);
         OptionVo optionVo = new OptionVo();
+
         optionVo.setName(name);
         optionVo.setName(value);
-        if (optionalDao.selectByPrimaryKey(name) == null) {
+        optionVo = optionalDao.selectByPrimaryKey(name);
+        if ( optionVo == null) {
             optionalDao.insertSelective(optionVo);
         } else {
             optionalDao.updateByPrimaryKeySelective(optionVo);

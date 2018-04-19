@@ -168,6 +168,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="springboot.modal.vo.OptionVo">
     update t_options
     <set>
