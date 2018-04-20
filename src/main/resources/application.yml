@@ -2,7 +2,8 @@ server:
   port: 80
 spring:
   profiles:
-    active: jdbc
+    active: jdbc,log
+
   thymeleaf:
     prefix: classpath:/templates/
     check-template-location: true
@@ -32,12 +33,12 @@ spring:
 # 连接池中的最小空闲连接
       min-idle: 0
 
-logging:
-  file: D:/mylog/log.log
+
+
 
 mybatis:
-  mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: springboot.dao
+
 pagehelper:
   helper-dialect: mysql
   reasonable: true

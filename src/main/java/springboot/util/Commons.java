@@ -51,7 +51,7 @@ public class Commons {
      * @return
      */
     public static String site_url() {
-        return site_url("");
+        return site_url("/page/1");
     }
 
     public static String site_index() {
@@ -77,8 +77,8 @@ public class Commons {
     }
 
     /**
-     * 网站标题
      *
+     * 网站标题
      * @return
      */
     public static String site_title() {
