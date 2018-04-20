@@ -13,10 +13,5 @@ import java.util.List;
 @SpringBootTest
 public class LogDaoTest {
 
-    @Resource
-    private LogDao logDaoo;
-    @Test
-    public void testSelectLog(){
-        List<LogVo> list = logDaoo.listLogVo();
-    }
+
 }
