@@ -2,6 +2,7 @@ server:
   port: 80
 spring:
   profiles:
+    # 外置jdbc和log配置文件
     active: jdbc,log
 
   thymeleaf:
@@ -32,9 +33,6 @@ spring:
       max-idle: 8
 # 连接池中的最小空闲连接
       min-idle: 0
-
-
-
 
 mybatis:
   type-aliases-package: springboot.dao

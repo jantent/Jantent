@@ -64,6 +64,7 @@ CREATE TABLE `t_contents` (
   `status` varchar(16) DEFAULT 'publish' ,
   `tags` varchar(200) DEFAULT NULL ,
   `categories` varchar(200) DEFAULT NULL ,
+  `thumbImg` varchar(512) ,
   `hits` int(10) unsigned DEFAULT '0' ,
   `comments_num` int(10) unsigned DEFAULT '0' ,
   `allow_comment` tinyint(1) DEFAULT '1' ,

@@ -42,6 +42,9 @@ public class ContentVo implements Serializable{
      */
     private String type;
 
+    // 文章缩略图
+    private String  thumbImg;
+
     /**
      * 内容状态
      */
@@ -215,6 +218,14 @@ public class ContentVo implements Serializable{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getThumbImg() {
+        return thumbImg;
+    }
+
+    public void setThumbImg(String thumbImg) {
+        this.thumbImg = thumbImg;
     }
 
     @Override

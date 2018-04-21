@@ -1,26 +1,100 @@
-/**
- * Created by 13 on 2017/2/22.
- */
-// Tags Input
-$('#tags').tagsInput({
-    width: '100%',
-    height: '35px',
-    defaultText: '请输入文章标签'
-});
-
-$('.toggle').toggles({
-    on: true,
-    text: {
-        on: '开启',
-        off: '关闭'
-    }
-});
-
-$(".select2").select2({
-    width: '100%'
-});
-
+var mditor;
 var tale = new $.tale();
+var attach_url = $('#attach_url').val();
+// 每60秒自动保存一次草稿
+var refreshIntervalId = setInterval("autoSave()", 60 * 1000);
+Dropzone.autoDiscover = false;
+
+$(document).ready(function () {
+
+    mditor = window.mditor = Mditor.fromTextarea(document.getElementById('md-editor'));
+
+    // Tags Input
+    $('#tags').tagsInput({
+        width: '100%',
+        height: '35px',
+        defaultText: '请输入文章标签'
+    });
+
+    $('.toggle').toggles({
+        on: true,
+        text: {
+            on: '开启',
+            off: '关闭'
+        }
+    });
+
+    $("#multiple-sel").select2({
+        width: '100%'
+    });
+
+    $('div.allow-false').toggles({
+        off: true,
+        text: {
+            on: '开启',
+            off: '关闭'
+        }
+    });
+
+    if($('#thumb-toggle').attr('thumb_url') != ''){
+        $('#thumb-toggle').toggles({
+            on: true,
+            text: {
+                on: '开启',
+                off: '关闭'
+            }
+        });
+        $('#thumb-toggle').attr('on', 'true');
+        $('#dropzone').css('background-image', 'url('+ $('#thumb-container').attr('thumb_url') +')');
+        $('#dropzone').css('background-size', 'cover');
+        $('#dropzone-container').show();
+    } else {
+        $('#thumb-toggle').toggles({
+            off: true,
+            text: {
+                on: '开启',
+                off: '关闭'
+            }
+        });
+        $('#thumb-toggle').attr('on', 'false');
+        $('#dropzone-container').hide();
+    }
+
+    var thumbdropzone = $('.dropzone');
+
+    // 缩略图上传
+    $("#dropzone").dropzone({
+        url: "/admin/attach/upload",
+        filesizeBase:1024,//定义字节算法 默认1000
+        maxFilesize: '10', //MB
+        fallback:function(){
+            tale.alertError('暂不支持您的浏览器上传!');
+        },
+        acceptedFiles: 'image/*',
+        dictFileTooBig:'您的文件超过10MB!',
+        dictInvalidInputType:'不支持您上传的类型',
+        init: function() {
+            this.on('success', function (files, result) {
+                console.log("upload success..");
+                console.log(" result => " + result);
+                if(result && result.success){
+                    var url = attach_url + result.payload[0].fkey;
+                    console.log('url => ' + url);
+                    thumbdropzone.css('background-image', 'url('+ url +')');
+                    thumbdropzone.css('background-size', 'cover');
+                    $('.dz-image').hide();
+                    $('#thumbImg').val(url);
+                }
+            });
+            this.on('error', function (a, errorMessage, result) {
+                if(!result.success && result.msg){
+                    tale.alertError(result.msg || '缩略图上传失败');
+                }
+            });
+        }
+    });
+
+});
 
 /**
  * 保存文章
@@ -62,12 +136,6 @@ function subArticle(status) {
     });
 }
 
-var textarea = $('#text'),
-    toolbar = $('<div class="markdown-editor" id="md-button-bar" />').insertBefore(textarea.parent())
-preview = $('<div id="md-preview" class="md-hidetab" />').insertAfter('.markdown-editor');
-
-markdown(textarea, toolbar, preview);
-
 
 function allow_comment(obj) {
     var this_ = $(obj);
@@ -106,10 +174,17 @@ function allow_feed(obj) {
     }
 }
 
-$('div.allow-false').toggles({
-    off: true,
-    text: {
-        on: '开启',
-        off: '关闭'
+function add_thumbimg(obj) {
+    var this_ = $(obj);
+    var on = this_.attr('on');
+    console.log(on);
+    if (on == 'true') {
+        this_.attr('on', 'false');
+        $('#dropzone-container').addClass('hide');
+        $('#thumbImg').val('');
+    } else {
+        this_.attr('on', 'true');
+        $('#dropzone-container').removeClass('hide');
+        $('#dropzone-container').show();
     }
-});
+}

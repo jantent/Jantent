@@ -13,6 +13,7 @@
     <result column="tags" jdbcType="VARCHAR" property="tags" />
     <result column="categories" jdbcType="VARCHAR" property="categories" />
     <result column="hits" jdbcType="INTEGER" property="hits" />
+    <result column="thumbImg" javaType="VARCHAR" property="thumbImg"/>
     <result column="comments_num" jdbcType="INTEGER" property="commentsNum" />
     <result column="allow_comment" jdbcType="BIT" property="allowComment" />
     <result column="allow_ping" jdbcType="BIT" property="allowPing" />

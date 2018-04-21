@@ -7,7 +7,8 @@
 
 <link href="//cdn.bootcss.com/multi-select/0.9.12/css/multi-select.css" rel="stylesheet"/>
 <link href="//cdn.bootcss.com/select2/3.4.8/select2.min.css" rel="stylesheet"/>
-<link th:href="@{/admin/plugins/md/css/style.css}" rel="stylesheet"/>
+<link th:href="@{/admin/plugins/mditor/css/mditor.min.css}" rel="stylesheet"/>
+<link th:href="@{/admin/plugins/dropzone/4.3.0/min/dropzone.min.css}" rel="stylesheet">
 <style>
     #tags_tagsinput {
         background-color: #fafafa;
@@ -20,6 +21,58 @@
 
     #tags_addTag {
         margin-top: -5px;
+    }
+
+    .mditor .editor{
+        font-size: 14px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .mditor .backdrop, .mditor .textarea, .mditor .viewer{
+        font-size: 14px;
+    }
+    .markdown-body{
+        font-size: 14px;
+    }
+    .note-toolbar {
+        text-align: center;
+    }
+
+    .note-editor.note-frame {
+        border: none;
+    }
+
+    .note-editor .note-toolbar {
+        background-color: #f5f5f5;
+        padding-bottom: 10px;
+    }
+
+    .note-toolbar .note-btn-group {
+        margin: 0;
+    }
+
+    .note-toolbar .note-btn {
+        border: none;
+    }
+
+    #articleForm #dropzone {
+        min-height: 200px;
+        background-color: #dbdde0;
+        line-height:200px;
+        margin-bottom: 10px;
+    }
+    #articleForm .dropzone {
+        border: 1px dashed #8662c6;
+        border-radius: 5px;
+        background: white;
+    }
+    #articleForm .dropzone .dz-message {
+        font-weight: 400;
+    }
+    #articleForm .dropzone .dz-message .note {
+        font-size: 0.8em;
+        font-weight: 200;
+        display: block;
+        margin-top: 1.4rem;
     }
 </style>
 <body class="fixed-left">
@@ -91,10 +144,8 @@
                                 </select>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="form-group">
-                                <textarea style="height: 450px" autocomplete="off" id="text" name="text"
-                                          class="markdown-textarea"
-                                          th:utext="${contents!=null and contents.content !=null}?${contents.content}: ''"></textarea>
+                            <div id="md-container" class="form-group">
+                                <textarea id="md-editor" th:utext="${contents!=null and contents.content !=null}?${contents.content}: ''"></textarea>
                             </div>
 
                             <div class="form-group col-md-3 col-sm-4">
@@ -119,6 +170,22 @@
                                     <div th:class="${contents!=null and  contents.allowFeed !=null}?'toggle toggle-success allow-'+${contents.allowFeed}: 'toggle toggle-success allow-true'"
                                          onclick="allow_feed(this);"></div>
                                 </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label class="col-sm-5">添加缩略图</label>
+                                <div class="col-sm-7">
+                                    <div id="thumb-toggle" class="toggle toggle-success" on="false" thumb_url="" onclick="add_thumbimg(this);"></div>
+                                </div>
+                            </div>
+
+                            <div id="dropzone-container" class="form-group col-md-12 hide">
+                                <div class="dropzone dropzone-previews" id="dropzone">
+                                    <div class="dz-message">
+                                        <p>可以为你的文章添加一张缩略图 ;)</p>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="thumbImg" id="thumbImg"/>
                             </div>
 
                             <div class="clearfix"></div>
@@ -147,15 +214,13 @@
 <script th:src="@{/admin/plugins/tagsinput/jquery.tagsinput.min.js}"></script>
 <script th:src="@{/admin/plugins/jquery-multi-select/jquery.quicksearch.js}"></script>
 
-<script th:src="@{/admin/plugins/md/js/jquery.scrollto.js}"></script>
-<script th:src="@{/admin/plugins/md/js/pagedown.js}"></script>
-<script th:src="@{/admin/plugins/md/js/pagedown-extra.js}"></script>
-<script th:src="@{/admin/plugins/md/js/diff.js}"></script>
-<script th:src="@{/admin/plugins/md/js/md.js}"></script>
-
-<script th:src="@{//cdn.bootcss.com/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
-<script th:src="@{//cdn.bootcss.com/select2/3.4.8/select2.min.js}"></script>
+<script th:src="@{/admin/plugins/mditor/js/mditor.min.js}"></script>
+<script th:src="@{/admin/plugins/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
+<script th:src="@{/admin/plugins/select2/3.4.8/select2.min.js}"></script>
 <script th:src="@{//cdn.bootcss.com/jquery-toggles/2.0.4/toggles.min.js}"></script>
+<script th:src="@{/admin/plugins/dropzone/4.3.0/min/dropzone.min.js}"></script>
+<script th:src="@{/admin/plugins/to-markdown/3.1.0/to-markdown.min.js}"></script>
+
 <script th:src="@{/admin/js/article.js}"></script>
 </body>
 </html>
