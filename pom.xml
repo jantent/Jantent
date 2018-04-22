@@ -100,11 +100,17 @@
             <version>3.5</version>
         </dependency>
 
-        <!--markdown处理-->
+        <!--markdown处理转html-->
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
-            <version>0.8.0</version>
+            <version>0.10.0</version>
+        </dependency>
+        <!-- markdown表格处理 -->
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-gfm-tables</artifactId>
+            <version>0.10.0</version>
         </dependency>
 
         <!--mybatis分页插件-->
