@@ -297,6 +297,9 @@ public class Commons {
      * @return
      */
     public static String show_thumb(ContentVo contents) {
+        if (StringUtils.isNotBlank(contents.getThumbimg())){
+            return contents.getThumbimg();
+        }
         int cid = contents.getCid();
         int size = cid % 33;
         size = size == 0 ? 1 : size;

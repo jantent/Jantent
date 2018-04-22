@@ -74,7 +74,7 @@ public class AttachController extends BaseController {
         UserVo users = this.user(request);
         Integer uid = users.getUid();
         List<String> errorFiles = new ArrayList<>();
-
+        List<AttachVo> attachVoList = new ArrayList<>();
         try {
             for (MultipartFile multipartFile : multipartFiles) {
                 String name = multipartFile.getOriginalFilename();
@@ -84,6 +84,9 @@ public class AttachController extends BaseController {
                     File file = new File(CLASSPATH + fkey);
                     FileCopyUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
                     attachService.save(name, fkey, ftype, uid);
+                    AttachVo attach = new AttachVo();
+                    attach.setFkey(fkey);
+                    attachVoList.add(attach);
                 } else {
                     errorFiles.add(name);
                 }
@@ -91,7 +94,7 @@ public class AttachController extends BaseController {
         } catch (Exception e) {
             return RestResponseBo.fail();
         }
-        return RestResponseBo.ok(errorFiles);
+        return RestResponseBo.ok(attachVoList);
     }
 
     @RequestMapping(value = "delete")

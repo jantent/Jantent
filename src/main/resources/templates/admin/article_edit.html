@@ -93,7 +93,10 @@
                         </h4>
                     </div>
                     <div class="col-md-12">
-                        <form id="articleForm" role="form" novalidate="novalidate">
+
+                        <input type="hidden" id="attach_url" th:value="${attach_url}" />
+
+                        <form id="articleForm">
                             <input type="hidden" name="categories" id="categories"/>
                             <input type="hidden" name="cid"
                                    th:value="${contents!=null and contents.cid!=null}?${contents.cid}: ''" id="cid"/>
@@ -110,6 +113,8 @@
                                    th:value="${contents!=null and contents.allowFeed !=null}?${contents.allowFeed}: true"
                                    id="allow_feed"/>
                             <input type="hidden" name="content" id="content-editor"/>
+                            <input type="hidden" name="fmtType" id="fmtType"/>
+
 
                             <div class="form-group col-md-6" style="padding: 0 10px 0 0;">
                                 <input type="text" class="form-control" placeholder="请输入文章标题（必须）" name="title"
@@ -175,7 +180,7 @@
                             <div class="form-group col-md-3">
                                 <label class="col-sm-5">添加缩略图</label>
                                 <div class="col-sm-7">
-                                    <div id="thumb-toggle" class="toggle toggle-success" on="false" thumb_url="" onclick="add_thumbimg(this);"></div>
+                                    <div id="thumb-toggle" class="toggle toggle-success" on="false" thumb_url="${contents.thumbimg}" onclick="add_thumbimg(this);"></div>
                                 </div>
                             </div>
 
@@ -185,7 +190,7 @@
                                         <p>可以为你的文章添加一张缩略图 ;)</p>
                                     </div>
                                 </div>
-                                <input type="hidden" name="thumbImg" id="thumbImg"/>
+                                <input type="hidden" name="thumbimg" id="thumbimg"/>
                             </div>
 
                             <div class="clearfix"></div>

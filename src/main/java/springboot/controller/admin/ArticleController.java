@@ -19,6 +19,7 @@ import springboot.modal.vo.UserVo;
 import springboot.service.IContentService;
 import springboot.service.ILogService;
 import springboot.service.IMetaService;
+import springboot.util.Commons;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -75,6 +76,7 @@ public class ArticleController extends BaseController {
     public String newArticle(HttpServletRequest request) {
         List<MetaVo> categories = metaService.getMetas(Types.CATEGORY.getType());
         request.setAttribute("categories", categories);
+        request.setAttribute(Types.ATTACH_URL.getType(), Commons.site_option(Types.ATTACH_URL.getType()));
         return "admin/article_edit";
     }
 
@@ -91,6 +93,7 @@ public class ArticleController extends BaseController {
         request.setAttribute("contents", contents);
         List<MetaVo> categories = metaService.getMetas(Types.CATEGORY.getType());
         request.setAttribute("categories", categories);
+        request.setAttribute(Types.ATTACH_URL.getType(), Commons.site_option(Types.ATTACH_URL.getType()));
         request.setAttribute("active", "article");
         return "admin/article_edit";
     }

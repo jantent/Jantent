@@ -10,10 +10,6 @@ public class ContentVoExample {
 
     protected List<Criteria> oredCriteria;
 
-    private Integer limit;
-
-    private Integer offset;
-
     public ContentVoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
@@ -65,22 +61,6 @@ public class ContentVoExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
-    public Integer getOffset() {
-        return offset;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1083,10 +1063,78 @@ public class ContentVoExample {
             addCriterion("allow_feed not between", value1, value2, "allowFeed");
             return (Criteria) this;
         }
+
+        public Criteria andThumbimgIsNull() {
+            addCriterion("thumbImg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgIsNotNull() {
+            addCriterion("thumbImg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgEqualTo(String value) {
+            addCriterion("thumbImg =", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgNotEqualTo(String value) {
+            addCriterion("thumbImg <>", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgGreaterThan(String value) {
+            addCriterion("thumbImg >", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgGreaterThanOrEqualTo(String value) {
+            addCriterion("thumbImg >=", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgLessThan(String value) {
+            addCriterion("thumbImg <", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgLessThanOrEqualTo(String value) {
+            addCriterion("thumbImg <=", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgLike(String value) {
+            addCriterion("thumbImg like", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgNotLike(String value) {
+            addCriterion("thumbImg not like", value, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgIn(List<String> values) {
+            addCriterion("thumbImg in", values, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgNotIn(List<String> values) {
+            addCriterion("thumbImg not in", values, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgBetween(String value1, String value2) {
+            addCriterion("thumbImg between", value1, value2, "thumbimg");
+            return (Criteria) this;
+        }
+
+        public Criteria andThumbimgNotBetween(String value1, String value2) {
+            addCriterion("thumbImg not between", value1, value2, "thumbimg");
+            return (Criteria) this;
+        }
     }
 
-    /**
-     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

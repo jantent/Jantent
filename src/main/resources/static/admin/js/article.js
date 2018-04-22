@@ -83,7 +83,7 @@ $(document).ready(function () {
                     thumbdropzone.css('background-image', 'url('+ url +')');
                     thumbdropzone.css('background-size', 'cover');
                     $('.dz-image').hide();
-                    $('#thumbImg').val(url);
+                    $('#thumbimg').val(url);
                 }
             });
             this.on('error', function (a, errorMessage, result) {
@@ -96,13 +96,37 @@ $(document).ready(function () {
 
 });
 
+/*
+ * 自动保存为草稿
+ * */
+function  autoSave() {
+    var content = mditor.value;
+    var title = $('#articleForm input[name=title]').val();
+    if (title != '' && content != '') {
+        $('#content-editor').val(content);
+        $("#articleForm #categories").val($('#multiple-sel').val());
+        var params = $("#articleForm").serialize();
+        var url = $('#articleForm #cid').val() != '' ? '/admin/article/modify' : '/admin/article/publish';
+        tale.post({
+            url: url,
+            data: params,
+            success: function (result) {
+                if (result && result.success) {
+                    $('#articleForm #cid').val(result.payload);
+                } else {
+                    tale.alertError(result.msg || '保存文章失败');
+                }
+            }
+        });
+    }
+}
 /**
  * 保存文章
  * @param status
  */
 function subArticle(status) {
     var title = $('#articleForm input[name=title]').val();
-    var content = $('#text').val();
+    var content =  mditor.value;
     if (title == '') {
         tale.alertWarn('请输入文章标题');
         return;

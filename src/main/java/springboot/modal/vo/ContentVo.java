@@ -1,96 +1,39 @@
 package springboot.modal.vo;
 
-import java.io.Serializable;
-
-/**
- * @author tangj
- * @date 2018/1/21 11:12
- */
-public class ContentVo implements Serializable{
-    /**
-     * post表主键
-     */
+public class ContentVo {
     private Integer cid;
 
-    /**
-     * 内容标题
-     */
     private String title;
 
-    /**
-     * 内容缩略名
-     */
     private String slug;
 
-    /**
-     * 内容生成时的GMT unix时间戳
-     */
     private Integer created;
 
-    /**
-     * 内容更改时的GMT unix时间戳
-     */
     private Integer modified;
 
-    /**
-     * 内容所属用户id
-     */
     private Integer authorId;
 
-    /**
-     * 内容类别
-     */
     private String type;
 
-    // 文章缩略图
-    private String  thumbImg;
-
-    /**
-     * 内容状态
-     */
     private String status;
 
-    /**
-     * 标签列表
-     */
     private String tags;
 
-    /**
-     * 分类列表
-     */
     private String categories;
 
-    /**
-     * 点击次数
-     */
     private Integer hits;
 
-    /**
-     * 内容所属评论数
-     */
     private Integer commentsNum;
 
-    /**
-     * 是否允许评论
-     */
     private Boolean allowComment;
 
-    /**
-     * 是否允许ping
-     */
     private Boolean allowPing;
 
-    /**
-     * 允许出现在聚合中
-     */
     private Boolean allowFeed;
 
-    /**
-     * 内容文字
-     */
-    private String content;
+    private String thumbimg;
 
-    private static final long serialVersionUID = 1L;
+    private String content;
 
     public Integer getCid() {
         return cid;
@@ -105,7 +48,7 @@ public class ContentVo implements Serializable{
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public String getSlug() {
@@ -113,7 +56,7 @@ public class ContentVo implements Serializable{
     }
 
     public void setSlug(String slug) {
-        this.slug = slug;
+        this.slug = slug == null ? null : slug.trim();
     }
 
     public Integer getCreated() {
@@ -145,7 +88,7 @@ public class ContentVo implements Serializable{
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.type = type == null ? null : type.trim();
     }
 
     public String getStatus() {
@@ -153,7 +96,7 @@ public class ContentVo implements Serializable{
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status == null ? null : status.trim();
     }
 
     public String getTags() {
@@ -161,7 +104,7 @@ public class ContentVo implements Serializable{
     }
 
     public void setTags(String tags) {
-        this.tags = tags;
+        this.tags = tags == null ? null : tags.trim();
     }
 
     public String getCategories() {
@@ -169,7 +112,7 @@ public class ContentVo implements Serializable{
     }
 
     public void setCategories(String categories) {
-        this.categories = categories;
+        this.categories = categories == null ? null : categories.trim();
     }
 
     public Integer getHits() {
@@ -212,41 +155,19 @@ public class ContentVo implements Serializable{
         this.allowFeed = allowFeed;
     }
 
+    public String getThumbimg() {
+        return thumbimg;
+    }
+
+    public void setThumbimg(String thumbimg) {
+        this.thumbimg = thumbimg == null ? null : thumbimg.trim();
+    }
+
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getThumbImg() {
-        return thumbImg;
-    }
-
-    public void setThumbImg(String thumbImg) {
-        this.thumbImg = thumbImg;
-    }
-
-    @Override
-    public String toString() {
-        return "ContentVo{" +
-                "cid=" + cid +
-                ", title='" + title + '\'' +
-                ", slug='" + slug + '\'' +
-                ", created=" + created +
-                ", modified=" + modified +
-                ", authorId=" + authorId +
-                ", type='" + type + '\'' +
-                ", status='" + status + '\'' +
-                ", tags='" + tags + '\'' +
-                ", categories='" + categories + '\'' +
-                ", hits=" + hits +
-                ", commentsNum=" + commentsNum +
-                ", allowComment=" + allowComment +
-                ", allowPing=" + allowPing +
-                ", allowFeed=" + allowFeed +
-                ", content='" + content + '\'' +
-                '}';
+        this.content = content == null ? null : content.trim();
     }
 }
