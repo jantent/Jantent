@@ -43,7 +43,7 @@ public class AuthController extends BaseController {
 
     @GetMapping(value = "/login")
     public String login() {
-        return "admin/lw-log";
+        return "admin/login";
     }
 
     @PostMapping(value = "login")
