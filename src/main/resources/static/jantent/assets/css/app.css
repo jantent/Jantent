@@ -1,94 +1,3 @@
-/* Write your styles */
-/*.mine {
-    /*padding: 130px 0;
-    background: #313131 url(http://www.seakong.cn/demo/bg/4.jpg) no-repeat center;
-    background-size: 100% auto;
-    position: relative;
-    z-index: 1;
-}
-.cover {
-    background: url(http://www.seakong.cn/images/overlay.png) repeat scroll 0 0 rgba(0, 0, 0, 0);
-    position: absolute;
-    right: 0px;
-    left: 0px;
-    top: 0px;
-    width: 1000px;
-    height: 400px;
-    z-index: 0;
-}
-.am-g img{
-    width:100%;
-    height:360px;
-    overflow:hidden;
-}
-.am-bor {
-    border:1px solid black;
-}
-@media only screen and (min-width: 1200px) {
-      .blog-g-fixed {
-        max-width: 100%;
-      }
-}
-
-.lw-bor {
-    border:1px solid gray;
-}
-
-.lw-sidebar {
-    width: 260px;
-    min-height: 100%;
-    float: left;
-    border-right: 1px solid #cecece;
-}
-.lw-sidebar .am-list li a {
-    color:black;
-    
-}
-@media only screen and (min-width: 641px) {
-  .lw-sidebar {
-    display: block;
-    position: static;
-    background: none;
-  }
-  .lw-offcanvas-bar {
-    position: static;
-    width: auto;
-    background: none;
-    -webkit-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-}
-@media only screen and (max-width: 640px) {
-  .lw-sidebar {
-    width: inherit;
-  }
-}
-
-.lw-sidebar {
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-.lw-sidebar {
-  z-index: 1600;
-}
-
-#bg {
-    width:1600px;
-    height:900px;
-    float:right;
-    background-color:#1b1b1b;
-}
-*/
-
-
-
-/**
- * log in css
- */
 html {
     width:100%;
     height:100%;
@@ -151,7 +60,6 @@ body {
     width: 165px;
     margin-left:10%;
     text-indent: -9999px;
-    background: url(http://s.amazeui.org/media/i/brand/amazeui-w.png) left center no-repeat;
     background-size: 125px 24px;
 }
 .log-header:hover {  

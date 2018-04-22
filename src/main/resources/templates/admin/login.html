@@ -10,12 +10,11 @@
     <link th:href="@{/admin/css/style.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+
+    <script th:src="@{/jantent/assets/js/amazeui.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/jantent/assets/css/amazeui.min.css}"/>
+    <link rel="stylesheet" th:href="@{/jantent/assets/css/app.css}"/>
+
     <style type="text/css">
         .panel-shadow {
             -moz-box-shadow: 0px 0px 10px 0px rgba(39, 49, 65, 0.1);
@@ -57,7 +56,7 @@
             <h3 class="text-center m-t-10"> Login My Blog</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal m-t-20" method="post" id="loginForm" onsubmit="return checkForm()">
+            <form class="am-form" method="post" id="loginForm" onsubmit="return checkForm()">
                 <div class="form-group">
                     <div class="col-xs-12">
                         <input class=" input-lg input-border" name="username" type="text" required=""
@@ -68,14 +67,6 @@
                     <div class="col-xs-12">
                         <input class=" input-lg input-border" name="password" type="password" required=""
                                placeholder="密码:"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="checkbox checkbox-danger">
-                            <input id="checkbox-signup" name="remeber_me" type="checkbox"/>
-                            <label for="checkbox-signup">记住我</label>
-                        </div>
                     </div>
                 </div>
                 <div class="form-group text-center m-t-40">

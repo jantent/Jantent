@@ -1,6 +1,5 @@
 package springboot.controller.admin;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -44,23 +43,21 @@ public class AuthController extends BaseController {
 
     @GetMapping(value = "/login")
     public String login() {
-        return "admin/login";
+        return "admin/lw-log";
     }
 
     @PostMapping(value = "login")
     @ResponseBody
     public RestResponseBo doLogin(@RequestParam String username,
                                   @RequestParam String password,
-                                  @RequestParam(required = false) String remeber_me,
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
         Integer error_count = cache.get("login_error_count");
         try {
             UserVo userVo = userService.login(username, password);
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, userVo);
-            if (StringUtils.isNotBlank(remeber_me)) {
-                MyUtils.setCookie(response, userVo.getUid());
-            }
+            // 设置30分钟的cookie
+            MyUtils.setCookie(response, userVo.getUid());
             logService.insertLog(LogActions.LOGIN.getAction(), null, request.getRemoteAddr(), userVo.getUid());
         } catch (Exception e) {
             error_count = null == error_count ? 1 : error_count + 1;
