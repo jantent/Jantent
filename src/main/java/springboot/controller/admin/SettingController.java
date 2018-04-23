@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
 import springboot.exception.TipException;
 import springboot.modal.bo.BackResponseBo;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin/setting")
-public class SettingController extends BaseController {
+public class SettingController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(SettingController.class);
 
     @Resource
@@ -77,7 +77,7 @@ public class SettingController extends BaseController {
             WebConst.initConfig = querys;
 
             if (StringUtils.isNotBlank(site_theme)) {
-                BaseController.THEME = "themes/" + site_theme;
+                AbstractController.THEME = "themes/" + site_theme;
             }
             logService.insertLog(LogActions.SYS_SETTING.getAction(), GsonUtils.toJsonString(querys), request.getRemoteAddr(), this.getUid(request));
             return RestResponseBo.ok();

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.MetaDto;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("admin/category")
-public class CategoryController extends BaseController {
+public class CategoryController extends AbstractController {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 

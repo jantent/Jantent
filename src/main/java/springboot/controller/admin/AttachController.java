@@ -9,7 +9,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springboot.constant.WebConst;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -38,7 +38,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("admin/attach")
-public class AttachController extends BaseController {
+public class AttachController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(AttachController.class);
 
     public static final String CLASSPATH = MyUtils.getUploadFilePath();

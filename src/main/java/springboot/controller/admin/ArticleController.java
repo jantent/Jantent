@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -34,7 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/article")
 @Transactional(rollbackFor = TipException.class)
-public class ArticleController extends BaseController {
+public class ArticleController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
     @Resource

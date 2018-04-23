@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
 import springboot.modal.vo.CommentVo;
@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("admin/comments")
-public class CommentController extends BaseController {
+public class CommentController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
     @Resource

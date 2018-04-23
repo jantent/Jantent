@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.Types;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("admin/links")
-public class LinkController extends BaseController {
+public class LinkController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(LinkController.class);
 
     @Resource

@@ -1,4 +1,4 @@
-package springboot.controller;
+package springboot.controller.blogpage;
 
 import com.github.pagehelper.PageInfo;
 import com.vdurmont.emoji.EmojiParser;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
+import springboot.controller.AbstractController;
 import springboot.dto.MetaDto;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -43,7 +44,7 @@ import java.util.List;
  * @date 2018/2/17 9:47
  */
 @Controller
-public class IndexController extends BaseController {
+public class IndexController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Autowired

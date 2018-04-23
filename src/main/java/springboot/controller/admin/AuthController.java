@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
@@ -32,7 +32,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/admin")
 @Transactional(rollbackFor = TipException.class)
-public class AuthController extends BaseController {
+public class AuthController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
     @Resource

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
@@ -36,7 +36,7 @@ import java.util.List;
 @Controller("adminIndexController")
 @RequestMapping("/admin")
 @Transactional(rollbackFor = TipException.class)
-public class IndexController extends BaseController {
+public class IndexController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Resource

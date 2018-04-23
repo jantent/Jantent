@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author tangj
  * @date 2018/1/21 11:25
  */
-public abstract class BaseController {
+public abstract class AbstractController {
     public static String THEME = "themes/jantent";
 
     protected MapCache cache = MapCache.single();
@@ -27,12 +27,12 @@ public abstract class BaseController {
         return THEME + "/" + viewName;
     }
 
-    public BaseController title(HttpServletRequest request, String title) {
+    public AbstractController title(HttpServletRequest request, String title) {
         request.setAttribute("title", title);
         return this;
     }
 
-    public BaseController keywords(HttpServletRequest request, String keywords) {
+    public AbstractController keywords(HttpServletRequest request, String keywords) {
         request.setAttribute("keywords", keywords);
         return this;
     }

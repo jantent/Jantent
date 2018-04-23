@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
-import springboot.controller.BaseController;
+import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("admin/page")
-public class PageController extends BaseController {
+public class PageController extends AbstractController {
     private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 
     @Resource
