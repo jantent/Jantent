@@ -1,8 +1,8 @@
 var mditor;
 var tale = new $.tale();
 var attach_url = $('#attach_url').val();
-// 每60秒自动保存一次草稿
-var refreshIntervalId = setInterval("autoSave()", 60 * 1000);
+// 每10分钟自动保存一次草稿
+var refreshIntervalId = setInterval("autoSave()", 10 * 60 * 1000);
 Dropzone.autoDiscover = false;
 
 $(document).ready(function () {

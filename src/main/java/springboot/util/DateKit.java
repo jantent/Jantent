@@ -41,13 +41,13 @@ public class DateKit {
     public DateKit() {
     }
 
-    public static boolean isToday(Date date) {
-        Date now = new Date();
-        boolean result = true;
-        result &= date.getYear() == now.getYear();
-        result &= date.getMonth() == now.getMonth();
-        result &= date.getDate() == now.getDate();
-        return result;
+    /**
+     * 生成日期加时间的消息
+     * @param unixTime
+     * @return
+     */
+    public static String formatDateByUnixTime(long unixTime){
+        return dateFormat(new Date(unixTime * 1000L),"yyyy-MM-dd HH:mm:ss");
     }
 
     public static long DaysBetween(Date date1, Date date2) {
@@ -619,6 +619,8 @@ public class DateKit {
     public static String formatDateByUnixTime(long unixTime, String dateFormat) {
         return dateFormat(new Date(unixTime * 1000L), dateFormat);
     }
+
+
 
     public static Date convertToDate(String input) {
         Date date = null;
