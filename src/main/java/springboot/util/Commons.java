@@ -430,6 +430,10 @@ public class Commons {
         return ICONS[cid % ICONS.length];
     }
 
+    public static String showCategoryUrl(MetaDto metaDto){
+        String url = "/category/"+metaDto.getName();
+        return url;
+    }
     /**
      * 获取社交的链接地址
      *

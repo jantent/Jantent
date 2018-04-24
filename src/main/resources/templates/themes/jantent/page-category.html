@@ -20,7 +20,7 @@
                             <div class="post-list-item-container ">
                                 <div class="item-label ">
                                     <div class="item-title">
-                                        <a th:href="${commons.permalink(article)}" th:text="${article.title}"></a>
+                                        <h2><a th:href="${commons.permalink(article)}" th:text="${article.title}"></a></h2>
                                     </div>
                                     <div class="item-meta clearfix">
                                         <div th:class="'item-meta-ico '+${commons.show_icon(article.cid)} "

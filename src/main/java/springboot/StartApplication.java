@@ -49,12 +49,12 @@ public class StartApplication {
         app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
 
-        String nettyIp = "0.0.0.0";
-        int port = 3460;
-        TcpNettyServer nettyServer = new TcpNettyServer(nettyIp,port);
-        nettyServer.startServer();
-
-        HttpNettyServer.getInstance().start();
+//        String nettyIp = "0.0.0.0";
+//        int port = 3460;
+//        TcpNettyServer nettyServer = new TcpNettyServer(nettyIp,port);
+//        nettyServer.startServer();
+//
+//        HttpNettyServer.getInstance().start();
     }
 
 

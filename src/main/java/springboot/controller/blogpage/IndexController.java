@@ -59,15 +59,32 @@ public class IndexController extends AbstractController {
     @Resource
     private ISiteService siteService;
 
+    /**
+     * 博客首页
+     *
+     * @param request
+     * @param limit
+     * @return
+     */
     @GetMapping(value = "/")
     private String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "10") int limit) {
         return this.index(request, 1, limit);
     }
 
+    /**
+     * 文章页
+     *
+     * @param request
+     * @param p
+     * @param limit
+     * @return
+     */
     @GetMapping(value = "page/{p}")
     public String index(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "10") int limit) {
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
         PageInfo<ContentVo> articles = contentService.getContents(p, limit);
+        List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
+        request.setAttribute("categories", categories);
         request.setAttribute("articles", articles);
         if (p > 1) {
             this.title(request, "第" + p + "页");
@@ -76,7 +93,7 @@ public class IndexController extends AbstractController {
     }
 
     /**
-     * 文章页
+     * 文章内容页
      *
      * @param request
      * @param cid
@@ -115,11 +132,31 @@ public class IndexController extends AbstractController {
         return this.render("post");
     }
 
+    /**
+     * 注销后的页面
+     *
+     * @param session
+     * @param response
+     */
     @RequestMapping("logout")
     public void logout(HttpSession session, HttpServletResponse response) {
         MyUtils.logout(session, response);
     }
 
+    /**
+     * 评论操作
+     *
+     * @param request
+     * @param response
+     * @param cid
+     * @param coid
+     * @param author
+     * @param mail
+     * @param url
+     * @param text
+     * @param _csrf_token
+     * @return
+     */
     @PostMapping(value = "comment")
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)

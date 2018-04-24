@@ -8,7 +8,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import springboot.server.handler.TcpNettyServerInitializer;
-import springboot.service.netty.IMsgProcesser;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -27,7 +26,6 @@ public class TcpNettyServer {
 
     private String host;
 
-    private IMsgProcesser msgProcesser;
 
     public TcpNettyServer(String host, int port){
         this.host = host;

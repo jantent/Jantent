@@ -765,7 +765,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .post-list-item-container .item-label .item-title a {
-    font-size: 17px;
+    font-size: 30px;
     line-height: 17px;
     word-break: break-all;
     color: #313131
