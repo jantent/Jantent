@@ -107,23 +107,4 @@ public class StartApplication {
 //        return tomcat;
 //    }
 
-    // redis配置
-    @Bean
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        //
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        // 1.设置值（value）的序列化采用Jackson2JsonRedisSerializer
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        // 2.设置键（key）的序列化采用StringRedisSerializer
-        template.setKeySerializer(new StringRedisSerializer());
-        template.afterPropertiesSet();
-        return template;
-    }
 }

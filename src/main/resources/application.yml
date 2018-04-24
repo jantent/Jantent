@@ -13,26 +13,7 @@ spring:
     content-type: text/html
     mode: HTML5
     cache: false
-# Redis数据库索引（默认为0）
-  redis:
-    database: 0
-   # 连接超时时间（毫秒）
-    timeout: 0
-# Redis服务器地址
-    host: 127.0.0.1
-# Redis服务器连接端口
-    port: 6379
-# Redis服务器连接密码（默认为空）
-    password:
-# 连接池最大连接数（使用负值表示没有限制）
-    pool:
-      max-active: 8
-# 连接池最大阻塞等待时间（使用负值表示没有限制）
-      max-wait: -1
-# 连接池中的最大空闲连接
-      max-idle: 8
-# 连接池中的最小空闲连接
-      min-idle: 0
+
 
 mybatis:
   type-aliases-package: springboot.dao
@@ -43,10 +24,6 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
-author:
-  name: tangj
-  age: 25
-
 httpportcfg:
   http_port: 8080
   https_port: 8443
@@ -56,3 +33,18 @@ nettyserver:
   serviceIp: 0.0.0.0
   servicePort: 3460
 
+redis:
+  # Redis服务器地址
+  host: 127.0.0.1
+  # Redis服务器连接端口
+  port: 6379
+  # 连接超时时间（毫秒）
+  timeout: 10
+  # 连接池中的最大空闲连接
+  maxIdle: 8
+  # 连接池中的最小空闲连接
+  minIdle: 0
+  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+  maxWait: 500
+  # 连接池最大连接数（使用负值表示没有限制）
+  maxTotal: 10

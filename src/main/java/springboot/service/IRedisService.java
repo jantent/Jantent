@@ -6,8 +6,8 @@ package springboot.service;
  */
 public interface IRedisService {
 
-    public boolean set(String key,String value);
+     boolean set(String key,String value);
 
-    public String get(String key);
+     String get(String key);
 
 }
