@@ -301,7 +301,7 @@ public class Commons {
             return contents.getThumbimg();
         }
         int cid = contents.getCid();
-        int size = cid % 33;
+        int size = cid % 29;
         size = size == 0 ? 1 : size;
         return "/user/img/rand/" + size + ".jpg";
     }

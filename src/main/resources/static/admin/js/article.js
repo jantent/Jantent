@@ -2,7 +2,7 @@ var mditor;
 var tale = new $.tale();
 var attach_url = $('#attach_url').val();
 // 每10分钟自动保存一次草稿
-var refreshIntervalId = setInterval("autoSave()", 10 * 60 * 1000);
+// var refreshIntervalId = setInterval("autoSave()", 10 * 60 * 1000);
 Dropzone.autoDiscover = false;
 
 $(document).ready(function () {
@@ -100,25 +100,25 @@ $(document).ready(function () {
  * 自动保存为草稿
  * */
 function  autoSave() {
-    var content = mditor.value;
-    var title = $('#articleForm input[name=title]').val();
-    if (title != '' && content != '') {
-        $('#content-editor').val(content);
-        $("#articleForm #categories").val($('#multiple-sel').val());
-        var params = $("#articleForm").serialize();
-        var url = $('#articleForm #cid').val() != '' ? '/admin/article/modify' : '/admin/article/publish';
-        tale.post({
-            url: url,
-            data: params,
-            success: function (result) {
-                if (result && result.success) {
-                    $('#articleForm #cid').val(result.payload);
-                } else {
-                    tale.alertError(result.msg || '保存文章失败');
-                }
-            }
-        });
-    }
+    // var content = mditor.value;
+    // var title = $('#articleForm input[name=title]').val();
+    // if (title != '' && content != '') {
+    //     $('#content-editor').val(content);
+    //     $("#articleForm #categories").val($('#multiple-sel').val());
+    //     var params = $("#articleForm").serialize();
+    //     var url = $('#articleForm #cid').val() != '' ? '/admin/article/modify' : '/admin/article/publish';
+    //     tale.post({
+    //         url: url,
+    //         data: params,
+    //         success: function (result) {
+    //             if (result && result.success) {
+    //                 $('#articleForm #cid').val(result.payload);
+    //             } else {
+    //                 tale.alertError(result.msg || '保存文章失败');
+    //             }
+    //         }
+    //     });
+    // }
 }
 /**
  * 保存文章
