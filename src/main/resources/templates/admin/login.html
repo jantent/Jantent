@@ -23,7 +23,7 @@
         <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
             <h1 class="log-title am-animation-slide-top">登录Jantent</h1>
             <br>
-            <form class="am-form" id="loginForm" method="post" onsubmit="return checkForm()">
+            <form class="am-form" id="loginForm">
 
                 <div class="am-input-group am-radius am-animation-slide-left">
                     <input type="text" class="am-radius" name="username"/>
@@ -37,8 +37,9 @@
                             class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
                 </div>
                 <br>
-                <button type="submit"
-                        class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay">
+                <button type="button"
+                        class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay"
+                 onclick="checkForm()">
                     登&nbsp;录
                 </button>
             </form>

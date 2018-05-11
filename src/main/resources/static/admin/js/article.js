@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     if($('#thumb-toggle').attr('thumb_url') != ''){
         $('#thumb-toggle').toggles({
-            on: true,
+            off: true,
             text: {
                 on: '开启',
                 off: '关闭'

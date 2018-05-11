@@ -67,19 +67,29 @@ public class AttachController extends AbstractController {
         return "admin/attach";
     }
 
+    /**
+     * 上次附件post
+     *
+     * @param request
+     * @param multipartFiles
+     * @return
+     * @throws IOException
+     */
     @PostMapping(value = "upload")
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
     public RestResponseBo upload(HttpServletRequest request, @RequestParam("file") MultipartFile[] multipartFiles) throws IOException {
         UserVo users = this.user(request);
         Integer uid = users.getUid();
-        List<String> errorFiles = new ArrayList<>();
+        // 记录上传成功的文件信息
         List<AttachVo> attachVoList = new ArrayList<>();
         try {
             for (MultipartFile multipartFile : multipartFiles) {
                 String name = multipartFile.getOriginalFilename();
                 if (multipartFile.getSize() <= WebConst.MAX_FILE_SIZE) {
+                    // 获取文件相对路径名，并文件目录
                     String fkey = MyUtils.getFileKey(name);
+                    // 判断文件是否是图片
                     String ftype = MyUtils.isImage(multipartFile.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType();
                     File file = new File(CLASSPATH + fkey);
                     FileCopyUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
@@ -87,12 +97,10 @@ public class AttachController extends AbstractController {
                     AttachVo attach = new AttachVo();
                     attach.setFkey(fkey);
                     attachVoList.add(attach);
-                } else {
-                    errorFiles.add(name);
                 }
             }
         } catch (Exception e) {
-            return RestResponseBo.fail();
+            return RestResponseBo.fail("文件上传失败");
         }
         return RestResponseBo.ok(attachVoList);
     }
@@ -103,15 +111,14 @@ public class AttachController extends AbstractController {
     public RestResponseBo delete(@RequestParam Integer id, HttpServletRequest request) {
         try {
             AttachVo attach = attachService.selectById(id);
-            if (null == attach){
+            if (null == attach) {
                 return RestResponseBo.fail("不存在该附件");
             }
             attachService.deleteById(id);
-            new File(CLASSPATH+attach.getFkey()).delete();
-            logService.insertLog(LogActions.DEL_ATTACH.getAction(),attach.getFkey(),request.getRemoteAddr(),this.getUid(request));
+            new File(CLASSPATH + attach.getFkey()).delete();
+            logService.insertLog(LogActions.DEL_ATTACH.getAction(), attach.getFkey(), request.getRemoteAddr(), this.getUid(request));
         } catch (Exception e) {
-            String msg = "附件删" +
-                    "除失败";
+            String msg = "附件删除失败";
             if (e instanceof TipException) {
                 msg = e.getMessage();
             } else {

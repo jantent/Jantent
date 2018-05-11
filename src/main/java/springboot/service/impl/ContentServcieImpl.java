@@ -79,6 +79,7 @@ public class ContentServcieImpl implements IContentService {
         } else {
             contents.setSlug(null);
         }
+        // 去除表情
         contents.setContent(EmojiParser.parseToAliases(contents.getContent()));
 
         int time = DateKit.getCurrentUnixTime();
@@ -87,9 +88,10 @@ public class ContentServcieImpl implements IContentService {
         contents.setHits(0);
         contents.setCommentsNum(0);
 
+        contentDao.insert(contents);
+
         String tags = contents.getTags();
         String categories = contents.getCategories();
-        contentDao.insert(contents);
         Integer cid = contents.getCid();
 
         metasService.saveMetas(cid, tags, Types.TAG.getType());

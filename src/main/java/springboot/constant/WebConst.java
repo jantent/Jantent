@@ -53,4 +53,8 @@ public class WebConst {
      * 上传文件最大1M
      */
     public static Integer MAX_FILE_SIZE = 1048576;
+    /**
+     * 首页缓存rediskey
+     */
+    public static final String INDEX_PAGE_KEY = "indexPageHtml";
 }

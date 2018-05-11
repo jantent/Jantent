@@ -47,7 +47,7 @@ public class ArticleController extends AbstractController {
     private ILogService logService;
 
     /**
-     * 文章列表
+     * 文章列表页面
      *
      * @param page
      * @param limit
@@ -67,7 +67,7 @@ public class ArticleController extends AbstractController {
     }
 
     /**
-     * 文章发表
+     * 文章发表页面
      *
      * @param request
      * @return
@@ -81,7 +81,7 @@ public class ArticleController extends AbstractController {
     }
 
     /**
-     * 文章编辑
+     * 文章编辑页面
      *
      * @param cid
      * @param request
@@ -99,7 +99,7 @@ public class ArticleController extends AbstractController {
     }
 
     /**
-     * 文章发表
+     * 文章发表 post
      *
      * @param contents
      * @param request
@@ -130,7 +130,7 @@ public class ArticleController extends AbstractController {
     }
 
     /**
-     * 文章更新
+     * 文章更新 post
      *
      * @param contents
      * @param request
@@ -158,7 +158,7 @@ public class ArticleController extends AbstractController {
     }
 
     /**
-     * 删除文章
+     * 删除文章 post
      *
      * @param cid
      * @param request

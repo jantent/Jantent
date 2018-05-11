@@ -142,13 +142,17 @@ public class PageController extends AbstractController {
             logService.insertLog(LogActions.DEL_PAGE.getAction(), cid + "", request.getRemoteAddr(), this.getUid(request));
         } catch (Exception e) {
             String msg = "页面删除失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            handlerException(e,msg);
         }
         return RestResponseBo.ok();
+    }
+
+    private RestResponseBo handlerException(Exception e, String msg){
+        if (e instanceof TipException) {
+            msg = e.getMessage();
+        } else {
+            logger.error(msg, e);
+        }
+        return RestResponseBo.fail(msg);
     }
 }

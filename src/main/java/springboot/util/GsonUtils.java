@@ -17,6 +17,13 @@ public class GsonUtils {
         return object == null ? null : gson.toJson(object);
     }
 
+    /**
+     * 将json字符串转成对象
+     *
+     * @param jstr
+     * @param clazz
+     * @return
+     */
     public static Object jsonToObject(String jstr, Class clazz) {
         Object object = null;
 

@@ -6,9 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.IContext;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
 import springboot.dto.MetaDto;
@@ -20,10 +24,7 @@ import springboot.modal.bo.RestResponseBo;
 import springboot.modal.vo.CommentVo;
 import springboot.modal.vo.ContentVo;
 import springboot.modal.vo.MetaVo;
-import springboot.service.ICommentService;
-import springboot.service.IContentService;
-import springboot.service.IMetaService;
-import springboot.service.ISiteService;
+import springboot.service.*;
 import springboot.util.IpUtil;
 import springboot.util.MyUtils;
 import springboot.util.PatternKit;
@@ -59,6 +60,12 @@ public class IndexController extends AbstractController {
     @Resource
     private ISiteService siteService;
 
+    @Resource
+    private ThymeleafViewResolver thymeleafViewResolver;
+
+    @Resource
+    private ApplicationContext applicationContext;
+
     /**
      * 博客首页
      *
@@ -80,7 +87,10 @@ public class IndexController extends AbstractController {
      * @return
      */
     @GetMapping(value = "page/{p}")
+    @ResponseBody
     public String index(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "10") int limit) {
+        // 将首页缓存在redis中，加快访问速度
+
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
         PageInfo<ContentVo> articles = contentService.getContents(p, limit);
         List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
@@ -199,6 +209,7 @@ public class IndexController extends AbstractController {
             return RestResponseBo.fail("您发表的评论太快了，请过会再试");
         }
 
+        // 去除js脚本
         author = MyUtils.cleanXSS(author);
         text = MyUtils.cleanXSS(text);
 
