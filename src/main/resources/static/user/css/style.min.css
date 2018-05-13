@@ -278,7 +278,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .bg-white {
-    background-color: #fff !important
+    background-color: #1E5B94
 }
 
 .bg-grey {
@@ -461,8 +461,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .navbar-logo {
     font-size: 22px;
-    color: #686d76;
-    line-height: 22px;
+    color: #fff;
+    line-height: 24px;
     position: absolute;
     top: 50%;
     left: 0;
@@ -1097,7 +1097,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .common-page .common-title {
-    font-size: 14px;
+    font-size: 25px;
     position: relative;
     margin: 10px auto;
     padding: 0 30px;
@@ -1118,11 +1118,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .common-page .post-list-item-container .item-label {
-    background-color: #fff
+    background-color: #73b0c7
 }
 
 .common-page .post-list-item-container .item-label .item-title a {
-    font-size: 14px;
+    font-size: 20px;
     color: #313131
 }
 
@@ -1501,7 +1501,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     position: relative;
     z-index: 1;
     margin-top: 0;
-    padding-bottom: 50px;
     background-color: #fff
 }
 
@@ -1527,14 +1526,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .footer-meta {
-    padding: 50px 0 0;
+    padding: 30px 0 0;
     list-style: none
 }
 
 .footer-meta .footer-container {
+
     width: 100%;
     max-width: 960px;
-    height: 250px;
     margin: 0 auto;
 }
 
@@ -1552,7 +1551,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .footer-meta .meta-copyright .info-text p {
-    font-size: 13px;
     line-height: 20px;
     margin: 0;
     color: #767676;

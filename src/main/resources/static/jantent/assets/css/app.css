@@ -127,9 +127,7 @@ body {
  * .blog-bor    border:1px solid #e5e5e5
  * css复用 与 规范化
  */
-a {
-    color:#474747;
-}
+
  a:hover {
     color:#10D07A;
 }
@@ -246,7 +244,7 @@ h1 span{
     border:1px solid #10D07A;
 }
 .blog-color {
-    color:#10D07A;
+    /**color:#10D07A;**/
 }
 .blog-continue {
     color:#000;

@@ -11,7 +11,7 @@
     <meta name="description" th:content="${description ?:commons.site_option('site_description')}"/>
     <link rel="shortcut icon" th:href="@{/user/img/logo.png}"/>
     <link rel="apple-touch-icon" th:href="@{/user/img/apple-touch-icon.png}"/>
-    <title><th:block th:text="${title ?: '首页'}+' - '+${commons.site_option('site_title','My Blog')}"></th:block></title>
+    <title><th:block th:text="${title ?: '首页'}+' - '+${commons.site_option('site_title','Janti Blog')}"></th:block></title>
     <link th:href="@{//cdn.bootcss.com/highlight.js/9.9.0/styles/xcode.min.css}" rel="stylesheet"/>
     <link th:href="@{/user/css/style.min.css}" rel="stylesheet"/>
     <script th:src="@{//cdn.bootcss.com/jquery/2.2.3/jquery.min.js}"></script>
@@ -32,13 +32,11 @@
 <![endif]-->
 <header id="header" class="header bg-white">
     <div class="navbar-container">
-        <a th:href="${commons.site_url()}" class="navbar-logo">
-            <img th:src="@{/user/img/logo.png}" alt="首页"/>
-        </a>
+        <a th:href="${commons.site_url()}" class="navbar-logo">首页</a>
         <div class="navbar-menu">
-            <a th:href="${commons.site_url('/archives')}">归档</a>
-            <a th:href="${commons.site_url('/links')}">友链</a>
-            <a th:href="${commons.site_url('/about')}">关于</a>
+            <a style="color: #fff" th:href="${commons.site_url('/archives')}">归档</a>
+            <a style="color: #fff" th:href="${commons.site_url('/links')}">友链</a>
+            <a style="color: #fff" th:href="${commons.site_url('/about')}">关于</a>
         </div>
         <div class="navbar-search" onclick="">
             <span class="icon-search"></span>
@@ -52,9 +50,9 @@
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
-                <li><a th:href="${commons.site_url('/archives')}">归档</a></li>
-                <li><a th:href="${commons.site_url('/links')}">友链</a></li>
-                <li><a th:href="${commons.site_url('/about')}">关于</a></li>
+                <li><a style="color: #fff" th:href="${commons.site_url('/archives')}">归档</a></li>
+                <li><a style="color: #fff" th:href="${commons.site_url('/links')}">友链</a></li>
+                <li><a style="color: #fff" th:href="${commons.site_url('/about')}">关于</a></li>
             </ul>
         </div>
     </div>

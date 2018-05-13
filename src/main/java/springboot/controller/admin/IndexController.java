@@ -48,6 +48,7 @@ public class IndexController extends AbstractController {
     @Resource
     private ISiteService siteService;
 
+
     /**
      * 管理中心起始页
      *

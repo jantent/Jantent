@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.Context;
 import org.thymeleaf.context.IContext;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -60,11 +61,6 @@ public class IndexController extends AbstractController {
     @Resource
     private ISiteService siteService;
 
-    @Resource
-    private ThymeleafViewResolver thymeleafViewResolver;
-
-    @Resource
-    private ApplicationContext applicationContext;
 
     /**
      * 博客首页
@@ -87,10 +83,8 @@ public class IndexController extends AbstractController {
      * @return
      */
     @GetMapping(value = "page/{p}")
-    @ResponseBody
     public String index(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "10") int limit) {
-        // 将首页缓存在redis中，加快访问速度
-
+        // 开启thymeleaf缓存，加快访问速度
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
         PageInfo<ContentVo> articles = contentService.getContents(p, limit);
         List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);

@@ -5,28 +5,6 @@
     <div class="footer-social">
         <div class="footer-container clearfix">
             <div class="social-list">
-                <th:block th:each="index:${commons.social()}">
-                    <th:block th:if="${index.value}!=null and ${index.value}!=''">
-                        <th:block th:switch="${index.key}">
-                            <th:block th:case="'weibo'">
-                                <a class="social weibo" target="blank"
-                                   th:href="@{${index.value}}">微博</a>
-                            </th:block>
-                            <th:block th:case="'zhihu'">
-                                <a class="social zhihu" target="blank"
-                                   th:href="@{${index.value}}">知乎</a>
-                            </th:block>
-                            <th:block th:case="'github'">
-                                <a class="social github" target="blank"
-                                   th:href="@{${index.value}}">Github</a>
-                            </th:block>
-                            <th:block th:case="'twitter'">
-                                <a class="social twitter" target="blank"
-                                   th:href="@{${index.value}}">Twitter</a>
-                            </th:block>
-                        </th:block>
-                    </th:block>
-                </th:block>
             </div>
         </div>
     </div>
@@ -40,13 +18,11 @@
                                  th:alt="${commons.site_title()}"/>
                         </a>
                         <br/>
-                        <p>&copy; 版权所有 <a href="https://github.com/JayTange/Jantent" target="_blank"
-                                          rel="nofollow">Jantent</a> 保留一切权利
+                        <p >&copy; Powered by <a style="color: #0e90d2" href="https://github.com/JayTange/Jantent" target="_blank"
+                                          rel="nofollow">Jantent</a>
                         </p>
+                        <p> 喜欢就去github上点个star吧 </p>
                         <br/>
-                        <th:block th:if="${option}!=null and ${option.getValue()}!=''">
-                            <p th:text="${option.getValue()}"></p>
-                        </th:block>
                     </div>
                 </div>
             </div>

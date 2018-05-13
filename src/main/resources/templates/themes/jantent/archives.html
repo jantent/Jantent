@@ -3,29 +3,26 @@
 <div th:replace="themes/jantent/header::header(title='文章归档',keywords=null)"></div>
 <body>
 <div class="main-content archive-page clearfix">
-    <div class="categorys-item">
+    <h1 class="blog-text-center">-- 存档 --</h1>
+    <div class="am-u-sm-12">
         <th:block th:each="archive : ${archives}">
-            <div class="categorys-title" th:text="${archive.date}"></div>
-            <div class="post-lists">
-                <div class="post-lists-body">
+            <ul>
+                <h2 th:text="${archive.date}"></h2>
                     <th:block th:each="article : ${archive.articles}">
-                        <div class="post-list-item">
-                            <div class="post-list-item-container">
-                                <div class="item-label">
-                                    <div class="item-title">
-                                        <a th:href="${commons.permalink(article.cid, article.slug)}" th:text="${article.title}"></a>
-                                    </div>
-                                    <div class="item-meta clearfix">
-                                        <div class="item-meta-date">发布于 <th:block th:text="${commons.fmtdate(article.created)}"/></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <li>
+                            <span class="am-u-sm-4 am-u-md-2 timeline-span">
+                                <th:block th:text="${commons.fmtdate(article.created)}"/>
+                            </span>
+                            <span class="am-u-sm-8 am-u-md-6">
+                                <a th:href="${commons.permalink(article.cid, article.slug)}"
+                                   th:text="${article.title}"></a>
+                            </span>
+                        </li>
                     </th:block>
-                </div>
-            </div>
+            </ul>
         </th:block>
     </div>
+</div>
 </div>
 </body>
 <div th:replace="themes/jantent/footer::footer"></div>

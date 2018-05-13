@@ -4,12 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import springboot.constant.WebConst;
 import springboot.dao.ContentVoMapper;
 import springboot.dao.MetaVoMapper;
 import springboot.dto.Types;
 import springboot.exception.TipException;
+import springboot.modal.redisKey.ContentKey;
 import springboot.modal.vo.ContentVo;
 import springboot.modal.vo.ContentVoExample;
 import springboot.service.IContentService;
@@ -17,10 +21,12 @@ import springboot.service.IMetaService;
 import springboot.service.IRelationshipService;
 import springboot.util.DateKit;
 import springboot.util.MyUtils;
+import springboot.util.RedisKeyUtil;
 import springboot.util.Tools;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author tangj
@@ -40,6 +46,15 @@ public class ContentServcieImpl implements IContentService {
 
     @Resource
     private IMetaService metasService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private ValueOperations<String,Object> valueOperations;
+
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public void publish(ContentVo contents) {
@@ -100,11 +115,20 @@ public class ContentServcieImpl implements IContentService {
 
     @Override
     public PageInfo<ContentVo> getContents(Integer p, Integer limit) {
-        ContentVoExample example = new ContentVoExample();
-        example.setOrderByClause("created desc");
-        example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType());
-        PageHelper.startPage(p, limit);
-        List<ContentVo> contentVoList = contentDao.selectByExampleWithBLOBs(example);
+        // 先从redis中读取文章首页信息
+        String contentKey = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, ContentKey.DEFAULT_VALUE);
+        List<ContentVo> contentVoList = (List<ContentVo>) valueOperations.get(contentKey);
+        // 设置12个小时的缓存
+        redisService.expireKey(contentKey,ContentKey.LIVE_TIME, TimeUnit.HOURS);
+        if (contentVoList == null || contentVoList.size() == 0) {
+            ContentVoExample example = new ContentVoExample();
+            example.setOrderByClause("created desc");
+            example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType());
+            PageHelper.startPage(p, limit);
+            contentVoList = contentDao.selectByExampleWithBLOBs(example);
+            valueOperations.set("contents", contentVoList);
+        }
+
         PageInfo<ContentVo> pageInfo = new PageInfo<>(contentVoList);
         return pageInfo;
     }
