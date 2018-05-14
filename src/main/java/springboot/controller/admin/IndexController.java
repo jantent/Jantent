@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.LogActions;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
@@ -139,12 +140,7 @@ public class IndexController extends AbstractController {
             return RestResponseBo.ok();
         } catch (Exception e) {
             String msg = "密码修改失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
     }
 }

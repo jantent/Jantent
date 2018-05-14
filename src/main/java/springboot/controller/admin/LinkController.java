@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.Types;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
@@ -57,12 +58,7 @@ public class LinkController extends AbstractController {
             }
         } catch (Exception e) {
             String msg = "友链保存失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -75,12 +71,7 @@ public class LinkController extends AbstractController {
             metaService.delete(mid);
         } catch (Exception e) {
             String msg = "友链删除失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }

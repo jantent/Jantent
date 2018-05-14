@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.LogActions;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -119,12 +120,7 @@ public class AttachController extends AbstractController {
             logService.insertLog(LogActions.DEL_ATTACH.getAction(), attach.getFkey(), request.getRemoteAddr(), this.getUid(request));
         } catch (Exception e) {
             String msg = "附件删除失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }

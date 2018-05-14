@@ -621,7 +621,6 @@ public class DateKit {
     }
 
 
-
     public static Date convertToDate(String input) {
         Date date = null;
         if(null == input) {

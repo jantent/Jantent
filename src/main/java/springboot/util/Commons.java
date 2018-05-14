@@ -409,6 +409,7 @@ public class Commons {
             if (m_image.find()) {
                 img = img + "," + m_image.group();
                 // //匹配src
+                @SuppressWarnings("AlibabaAvoidPatternCompileInMethod")
                 Matcher m = Pattern.compile("src\\s*=\\s*\'?\"?(.*?)(\'|\"|>|\\s+)").matcher(img);
                 if (m.find()) {
                     return m.group(1);

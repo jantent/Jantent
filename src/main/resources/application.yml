@@ -3,7 +3,7 @@ server:
 spring:
   profiles:
     # 外置jdbc和log配置文件
-    active: jdbc,log,redis
+    active: jdbc,log,redis,mail
 
   thymeleaf:
     prefix: classpath:/templates/

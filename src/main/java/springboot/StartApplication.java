@@ -31,9 +31,8 @@ import springboot.server.HttpNettyServer;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-@EnableAutoConfiguration
+
 @SpringBootApplication
-@ComponentScan
 @EnableScheduling
 @MapperScan("springboot.dao")
 public class StartApplication {
@@ -48,14 +47,9 @@ public class StartApplication {
 
         SpringApplication app = new SpringApplication(StartApplication.class);
         app.setBannerMode(Banner.Mode.OFF);
+        app.setBannerMode(Banner.Mode.OFF);
         app.run(args);
 
-//        String nettyIp = "0.0.0.0";
-//        int port = 3460;
-//        TcpNettyServer nettyServer = new TcpNettyServer(nettyIp,port);
-//        nettyServer.startServer();
-//
-//        HttpNettyServer.getInstance().start();
     }
 
 

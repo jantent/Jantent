@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.MetaDto;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -49,12 +50,7 @@ public class CategoryController extends AbstractController {
             metaService.saveMeta(Types.CATEGORY.getType(), cname, mid);
         } catch (Exception e) {
             String msg = "分类保存失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -67,12 +63,7 @@ public class CategoryController extends AbstractController {
             metaService.delete(mid);
         } catch (Exception e) {
             String msg = "删除失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }

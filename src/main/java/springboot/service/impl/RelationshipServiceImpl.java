@@ -16,9 +16,6 @@ import java.util.List;
 @Service
 public class RelationshipServiceImpl implements IRelationshipService {
 
-    /**
-     * @TODO  曾经在这里没有注入 导致数据库操作失败
-     */
     @Resource
     private RelationshipVoMapper relationshipVoDao;
 

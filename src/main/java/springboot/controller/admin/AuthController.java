@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.LogActions;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
@@ -33,7 +34,7 @@ import java.io.IOException;
 @RequestMapping("/admin")
 @Transactional(rollbackFor = TipException.class)
 public class AuthController extends AbstractController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Resource
     private IUserService userService;
@@ -66,12 +67,7 @@ public class AuthController extends AbstractController {
             }
             cache.set("login_error_count", error_count, 10 * 60);
             String msg = "登录失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                LOGGER.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -86,7 +82,7 @@ public class AuthController extends AbstractController {
             response.sendRedirect(Commons.site_login());
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error("注销失败", e);
+            logger.error("注销失败", e);
         }
     }
 }

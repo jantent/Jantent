@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.exception.TipException;
 import springboot.modal.bo.RestResponseBo;
 import springboot.modal.vo.CommentVo;
@@ -60,12 +61,7 @@ public class CommentController extends AbstractController {
             commentServcie.delete(coid, comments.getCid());
         } catch (Exception e) {
             String msg = "评论删除失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -81,12 +77,7 @@ public class CommentController extends AbstractController {
             commentServcie.update(comments);
         } catch (Exception e) {
             String msg = "操作失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -126,12 +117,7 @@ public class CommentController extends AbstractController {
             return RestResponseBo.ok();
         } catch (Exception e) {
             String msg = "回复失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
     }
 }

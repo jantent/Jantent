@@ -58,26 +58,7 @@ public class ContentServcieImpl implements IContentService {
 
     @Override
     public void publish(ContentVo contents) {
-        if (null == contents) {
-            throw new TipException("文章对象为空");
-        }
-        if (StringUtils.isBlank(contents.getTitle())) {
-            throw new TipException("文章标题不能为空");
-        }
-        if (StringUtils.isBlank(contents.getContent())) {
-            throw new TipException("文章内容不能为空");
-        }
-        int titleLength = contents.getTitle().length();
-        if (titleLength > WebConst.MAX_TITLE_COUNT) {
-            throw new TipException("文章标题过长");
-        }
-        int contentLength = contents.getContent().length();
-        if (contentLength > WebConst.MAX_TEXT_COUNT) {
-            throw new TipException("文章内容过长");
-        }
-        if (null == contents.getAuthorId()) {
-            throw new TipException("请登录后发布文章");
-        }
+        checkContent(contents);
         if (StringUtils.isNotBlank(contents.getSlug())) {
             if (contents.getSlug().length() < 5) {
                 throw new TipException("路径太短了");
@@ -205,24 +186,8 @@ public class ContentServcieImpl implements IContentService {
 
     @Override
     public void updateArticle(ContentVo contents) {
-        if (null == contents || null == contents.getCid()) {
-            throw new TipException("文章对象不能为空");
-        }
-        if (StringUtils.isBlank(contents.getTitle())) {
-            throw new TipException("文章标题不能为空");
-        }
-        if (StringUtils.isBlank(contents.getContent())) {
-            throw new TipException("文章内容不能为空");
-        }
-        if (contents.getTitle().length() > 200) {
-            throw new TipException("文章标题过长");
-        }
-        if (contents.getContent().length() > 65000) {
-            throw new TipException("文章内容过长");
-        }
-        if (null == contents.getAuthorId()) {
-            throw new TipException("请登录后发布文章");
-        }
+        // 检查文章输入
+        checkContent(contents);
         if (StringUtils.isBlank(contents.getSlug())) {
             contents.setSlug(null);
         }
@@ -244,5 +209,26 @@ public class ContentServcieImpl implements IContentService {
         ContentVoExample example = new ContentVoExample();
         example.createCriteria().andCategoriesEqualTo(ordinal);
         contentDao.updateByExampleSelective(contentVo, example);
+    }
+
+    private void  checkContent(ContentVo contents) throws TipException{
+        if (null == contents || null == contents.getCid()) {
+            throw new TipException("文章对象不能为空");
+        }
+        if (StringUtils.isBlank(contents.getTitle())) {
+            throw new TipException("文章标题不能为空");
+        }
+        if (StringUtils.isBlank(contents.getContent())) {
+            throw new TipException("文章内容不能为空");
+        }
+        if (contents.getTitle().length() > 200) {
+            throw new TipException("文章标题过长");
+        }
+        if (contents.getContent().length() > 65000) {
+            throw new TipException("文章内容过长");
+        }
+        if (null == contents.getAuthorId()) {
+            throw new TipException("请登录后发布文章");
+        }
     }
 }

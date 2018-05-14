@@ -173,8 +173,9 @@ public class UUID {
 
         // 返回 UUID 对象
         char[] names = new char[32];
-        for (int i = 0; i < bytes.length; i++)
+        for (int i = 0; i < bytes.length; i++) {
             names[i] = _UU16[bytes[i]];
+        }
         return new String(names);
     }
 

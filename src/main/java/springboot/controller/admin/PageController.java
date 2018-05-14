@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.LogActions;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -86,12 +87,7 @@ public class PageController extends AbstractController {
             contentService.publish(contents);
         } catch (Exception e) {
             String msg = "页面发布失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -123,12 +119,7 @@ public class PageController extends AbstractController {
             contentService.updateArticle(contents);
         } catch (Exception e) {
             String msg = "页面编辑失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
@@ -142,17 +133,10 @@ public class PageController extends AbstractController {
             logService.insertLog(LogActions.DEL_PAGE.getAction(), cid + "", request.getRemoteAddr(), this.getUid(request));
         } catch (Exception e) {
             String msg = "页面删除失败";
-            handlerException(e,msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
     }
 
-    private RestResponseBo handlerException(Exception e, String msg){
-        if (e instanceof TipException) {
-            msg = e.getMessage();
-        } else {
-            logger.error(msg, e);
-        }
-        return RestResponseBo.fail(msg);
-    }
+
 }

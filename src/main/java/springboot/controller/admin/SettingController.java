@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
+import springboot.controller.helper.ExceptionHelper;
 import springboot.dto.LogActions;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -85,12 +86,7 @@ public class SettingController extends AbstractController {
             return RestResponseBo.ok();
         } catch (Exception e) {
             String msg = "保存设置失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
     }
 
@@ -108,18 +104,13 @@ public class SettingController extends AbstractController {
 
         } catch (Exception e) {
             String msg = "备份失败";
-            if (e instanceof TipException) {
-                msg = e.getMessage();
-            } else {
-                logger.error(msg, e);
-            }
-            return RestResponseBo.fail(msg);
+            return ExceptionHelper.handlerException(logger, msg, e);
         }
     }
 
     @PostMapping(value = "advanced")
     @ResponseBody
-    public RestResponseBo doAdvanced(@RequestParam String cache_key,@RequestParam String block_ips){
+    public RestResponseBo doAdvanced(@RequestParam String cache_key, @RequestParam String block_ips) {
         // 清除缓存
         if (StringUtils.isNotBlank(cache_key)) {
             if ("*".equals(cache_key)) {
@@ -155,7 +146,6 @@ public class SettingController extends AbstractController {
             String item = var3[var5];
             ret.append(',').append(item);
         }
-
         return ret.length() > 0 ? ret.substring(1) : ret.toString();
     }
 }
