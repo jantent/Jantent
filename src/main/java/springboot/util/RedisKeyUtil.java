@@ -38,7 +38,7 @@ public class RedisKeyUtil {
         StringBuffer buffer = new StringBuffer();
         buffer.append(tableName).append(":");
         buffer.append(majorKey).append(":");
-        buffer.append(majorKeyValue).append(":");
+        buffer.append(majorKeyValue);
         return buffer.toString();
     }
 }

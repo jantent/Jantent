@@ -371,8 +371,14 @@ public class IndexController extends AbstractController {
         return this.render("page-category");
     }
 
+    /**
+     * IP被禁后的页面
+     *
+     * @param request
+     * @return
+     */
     @GetMapping(value = "comm/ipban")
-    public String ipBan(HttpServletRequest request){
+    public String ipBan(HttpServletRequest request) {
         return "comm/ipban";
     }
 

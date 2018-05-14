@@ -118,15 +118,16 @@ public class ContentServcieImpl implements IContentService {
         // 先从redis中读取文章首页信息
         String contentKey = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, ContentKey.DEFAULT_VALUE);
         List<ContentVo> contentVoList = (List<ContentVo>) valueOperations.get(contentKey);
-        // 设置12个小时的缓存
-        redisService.expireKey(contentKey,ContentKey.LIVE_TIME, TimeUnit.HOURS);
+
         if (contentVoList == null || contentVoList.size() == 0) {
             ContentVoExample example = new ContentVoExample();
             example.setOrderByClause("created desc");
             example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType());
             PageHelper.startPage(p, limit);
             contentVoList = contentDao.selectByExampleWithBLOBs(example);
-            valueOperations.set("contents", contentVoList);
+            valueOperations.set(contentKey, contentVoList);
+            // 设置12个小时的缓存
+            redisService.expireKey(contentKey,ContentKey.LIVE_TIME, TimeUnit.HOURS);
         }
 
         PageInfo<ContentVo> pageInfo = new PageInfo<>(contentVoList);
