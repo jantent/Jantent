@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
 import springboot.dto.LogActions;
+import springboot.dto.Types;
 import springboot.exception.TipException;
 import springboot.modal.bo.BackResponseBo;
 import springboot.modal.bo.RestResponseBo;
@@ -20,6 +21,7 @@ import springboot.util.GsonUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,6 +115,29 @@ public class SettingController extends AbstractController {
             }
             return RestResponseBo.fail(msg);
         }
+    }
+
+    @PostMapping(value = "advanced")
+    @ResponseBody
+    public RestResponseBo doAdvanced(@RequestParam String cache_key,@RequestParam String block_ips){
+        // 清除缓存
+        if (StringUtils.isNotBlank(cache_key)) {
+            if ("*".equals(cache_key)) {
+                cache.clean();
+            } else {
+                cache.del(cache_key);
+            }
+        }
+        // 要过过滤的黑名单列表
+        if (StringUtils.isNotBlank(block_ips)) {
+            String url = Types.BLOCK_IPS.getType();
+            optionService.insertOption(Types.BLOCK_IPS.getType(), block_ips);
+            WebConst.BLOCK_IPS.addAll(Arrays.asList(block_ips.split(",")));
+        } else {
+            optionService.insertOption(Types.BLOCK_IPS.getType(), "");
+            WebConst.BLOCK_IPS.clear();
+        }
+        return RestResponseBo.ok();
     }
 
     /**

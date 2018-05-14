@@ -1,4 +1,4 @@
-package springboot.controller.blogpage;
+package springboot.controller.home;
 
 import com.github.pagehelper.PageInfo;
 import com.vdurmont.emoji.EmojiParser;
@@ -6,14 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.context.IContext;
-import org.thymeleaf.context.WebContext;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
 import springboot.dto.MetaDto;
@@ -376,6 +371,10 @@ public class IndexController extends AbstractController {
         return this.render("page-category");
     }
 
+    @GetMapping(value = "comm/ipban")
+    public String ipBan(HttpServletRequest request){
+        return "comm/ipban";
+    }
 
     /**
      * 更新点击次数
@@ -433,4 +432,5 @@ public class IndexController extends AbstractController {
         cookie.setSecure(false);
         response.addCookie(cookie);
     }
+
 }

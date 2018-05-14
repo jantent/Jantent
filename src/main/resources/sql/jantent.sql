@@ -103,7 +103,6 @@ CREATE TABLE `t_options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 DROP TABLE IF EXISTS `t_relationships`;
 
 CREATE TABLE `t_relationships` (

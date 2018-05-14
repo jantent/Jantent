@@ -40,8 +40,9 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
+        String ip = IpUtil.getIpAddrByRequest(request);
         logger.info("UserAgent: {}", request.getHeader(USER_AGENT));
-        logger.info("用户访问地址: {}, 来路地址: {}", uri, IpUtil.getIpAddrByRequest(request));
+        logger.info("用户访问地址: {}, 来路地址: {}", uri, ip);
 
         //请求拦截处理
         UserVo user = MyUtils.getLoginUser(request);
@@ -67,6 +68,13 @@ public class BaseInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        String ip = IpUtil.getIpAddrByRequest(request);
+        // 禁止该ip访问
+        if (WebConst.BLOCK_IPS.contains(ip)) {
+            // 强制跳转
+            modelAndView.setViewName("comm/ipban");
+        }
+
         request.setAttribute("commons",commons);
         request.setAttribute("adminCommons",adminCommons);
     }

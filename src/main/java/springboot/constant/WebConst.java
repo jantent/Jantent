@@ -3,7 +3,9 @@ package springboot.constant;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * web常量
@@ -57,4 +59,9 @@ public class WebConst {
      * 首页缓存rediskey
      */
     public static final String INDEX_PAGE_KEY = "indexPageHtml";
+
+    /**
+     * 要过滤的ip列表
+     */
+    public static final Set<String> BLOCK_IPS = new HashSet<>(16);
 }
