@@ -15,5 +15,5 @@ public class ContentKey {
     public static final String DEFAULT_VALUE = "all";
 
     // 生存周期
-    public static final int LIVE_TIME = 12;
+    public static final int LIVE_TIME = 6;
 }

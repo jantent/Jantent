@@ -96,46 +96,44 @@ public class ContentServcieImpl implements IContentService {
 
     @Override
     public PageInfo<ContentVo> getContents(Integer p, Integer limit) {
-        // 先从redis中读取文章首页信息
-        String contentKey = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, ContentKey.DEFAULT_VALUE);
-        List<ContentVo> contentVoList = (List<ContentVo>) valueOperations.get(contentKey);
-
-        if (contentVoList == null || contentVoList.size() == 0) {
-            ContentVoExample example = new ContentVoExample();
-            example.setOrderByClause("created desc");
-            example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType());
-            PageHelper.startPage(p, limit);
-            contentVoList = contentDao.selectByExampleWithBLOBs(example);
-            valueOperations.set(contentKey, contentVoList);
-            // 设置12个小时的缓存
-            redisService.expireKey(contentKey,ContentKey.LIVE_TIME, TimeUnit.HOURS);
-        }
-
+        ContentVoExample example = new ContentVoExample();
+        example.setOrderByClause("created desc");
+        example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType());
+        PageHelper.startPage(p, limit);
+        List<ContentVo> contentVoList = contentDao.selectByExampleWithBLOBs(example);
         PageInfo<ContentVo> pageInfo = new PageInfo<>(contentVoList);
         return pageInfo;
     }
 
     @Override
     public ContentVo getContents(String id) {
-        if (StringUtils.isNotBlank(id)) {
-            if (Tools.isNumber(id)) {
-                ContentVo contentVo = contentDao.selectByPrimaryKey(Integer.valueOf(id));
-                if (contentVo != null) {
-                    contentVo.setHits(contentVo.getHits() + 1);
-                    contentDao.updateByPrimaryKey(contentVo);
+        // 先从redis中读取文章信息
+        String contentKey = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, id);
+        ContentVo contentVo = (ContentVo) valueOperations.get(contentKey);
+        if (contentVo == null){
+            if (StringUtils.isNotBlank(id)) {
+                if (Tools.isNumber(id)) {
+                    contentVo = contentDao.selectByPrimaryKey(Integer.valueOf(id));
+                    if (contentVo != null) {
+                        contentVo.setHits(contentVo.getHits() + 1);
+                        contentDao.updateByPrimaryKey(contentVo);
+                    }
+                    return contentVo;
+                } else {
+                    ContentVoExample contentVoExample = new ContentVoExample();
+                    contentVoExample.createCriteria().andSlugEqualTo(id);
+                    List<ContentVo> contentVos = contentDao.selectByExampleWithBLOBs(contentVoExample);
+                    if (contentVos.size() != 1) {
+                        throw new TipException("query content by id and return is not one");
+                    }
+                    contentVo = contentVos.get(0);
+                    valueOperations.set(contentKey,contentVo);
+                    redisService.expireKey(contentKey,ContentKey.LIVE_TIME, TimeUnit.HOURS);
+                    return contentVo;
                 }
-                return contentVo;
-            } else {
-                ContentVoExample contentVoExample = new ContentVoExample();
-                contentVoExample.createCriteria().andSlugEqualTo(id);
-                List<ContentVo> contentVos = contentDao.selectByExampleWithBLOBs(contentVoExample);
-                if (contentVos.size() != 1) {
-                    throw new TipException("query content by id and return is not one");
-                }
-                return contentVos.get(0);
             }
         }
-        return null;
+        return contentVo;
     }
 
     @Override
@@ -197,6 +195,10 @@ public class ContentServcieImpl implements IContentService {
         contents.setContent(EmojiParser.parseToAliases(contents.getContent()));
 
         contentDao.updateByPrimaryKeySelective(contents);
+        // 更新缓存
+        String contentKey  = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, contents.getSlug());
+        redisService.deleteKey(contentKey);
+
         relationshipService.deleteById(cid, null);
         metasService.saveMetas(cid, contents.getTags(), Types.TAG.getType());
         metasService.saveMetas(cid, contents.getCategories(), Types.CATEGORY.getType());
