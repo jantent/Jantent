@@ -214,7 +214,7 @@ public class ContentServcieImpl implements IContentService {
     }
 
     private void  checkContent(ContentVo contents) throws TipException{
-        if (null == contents || null == contents.getCid()) {
+        if (null == contents) {
             throw new TipException("文章对象不能为空");
         }
         if (StringUtils.isBlank(contents.getTitle())) {
