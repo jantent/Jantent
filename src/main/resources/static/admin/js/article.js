@@ -96,6 +96,57 @@ $(document).ready(function () {
 
 });
 
+var fmtType = $('#fmtType').val();
+// 富文本编辑器
+if (fmtType != 'markdown') {
+    var this_ = $('#switch-btn');
+    mditor.value = '';
+    $('#md-container').hide();
+    $('#html-container').show();
+    this_.text('切换为Markdown编辑器');
+    this_.attr('type', 'texteditor');
+} else {
+    var this_ = $('#switch-btn');
+    $('#html-container').hide();
+    $('#md-container').show();
+    $('#fmtType').val('markdown');
+    this_.attr('type', 'markdown');
+    this_.text('切换为富文本编辑器');
+    htmlEditor.summernote("code", "");
+}
+
+/*
+ * 切换编辑器
+ * */
+$('#switch-btn').click(function () {
+    var type = $('#fmtType').val();
+    var this_ = $(this);
+    if (type == 'markdown') {
+        // 切换为富文本编辑器
+        if($('#md-container .markdown-body').html().length > 0){
+            $('#html-container .note-editable').empty().html($('#md-container .markdown-body').html());
+            $('#html-container .note-placeholder').hide();
+
+        }
+        mditor.value = '';
+        $('#md-container').hide();
+        $('#html-container').show();
+        this_.text('切换为Markdown编辑器');
+        $('#fmtType').val('html');
+    } else {
+        // 切换为markdown编辑器
+        if($('#html-container .note-editable').html().length > 0){
+            mditor.value = '';
+            mditor.value = toMarkdown($('#html-container .note-editable').html());
+        }
+        $('#html-container').hide();
+        $('#md-container').show();
+        $('#fmtType').val('markdown');
+        this_.text('切换为富文本编辑器');
+        htmlEditor.summernote("code", "");
+    }
+});
+
 /*
  * 自动保存为草稿
  * */
