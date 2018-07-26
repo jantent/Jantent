@@ -70,6 +70,7 @@ CREATE TABLE `t_contents` (
   `allow_comment` tinyint(1) DEFAULT '1' ,
   `allow_ping` tinyint(1) DEFAULT '1' ,
   `allow_feed` tinyint(1) DEFAULT '1' ,
+  `fmtType` VARCHAR(128),
   PRIMARY KEY (`cid`),
   UNIQUE KEY `slug` (`slug`),
   KEY `created` (`created`)

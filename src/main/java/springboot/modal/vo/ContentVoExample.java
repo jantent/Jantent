@@ -1133,6 +1133,76 @@ public class ContentVoExample {
             addCriterion("thumbImg not between", value1, value2, "thumbimg");
             return (Criteria) this;
         }
+
+        public Criteria andFmttypeIsNull() {
+            addCriterion("fmtType is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeIsNotNull() {
+            addCriterion("fmtType is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeEqualTo(String value) {
+            addCriterion("fmtType =", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeNotEqualTo(String value) {
+            addCriterion("fmtType <>", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeGreaterThan(String value) {
+            addCriterion("fmtType >", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeGreaterThanOrEqualTo(String value) {
+            addCriterion("fmtType >=", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeLessThan(String value) {
+            addCriterion("fmtType <", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeLessThanOrEqualTo(String value) {
+            addCriterion("fmtType <=", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeLike(String value) {
+            addCriterion("fmtType like", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeNotLike(String value) {
+            addCriterion("fmtType not like", value, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeIn(List<String> values) {
+            addCriterion("fmtType in", values, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeNotIn(List<String> values) {
+            addCriterion("fmtType not in", values, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeBetween(String value1, String value2) {
+            addCriterion("fmtType between", value1, value2, "fmttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFmttypeNotBetween(String value1, String value2) {
+            addCriterion("fmtType not between", value1, value2, "fmttype");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

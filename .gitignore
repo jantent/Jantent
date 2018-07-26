@@ -2,3 +2,5 @@
 .idea/*
 Jantent.iml
 target/
+*yml
+upload

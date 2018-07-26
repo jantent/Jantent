@@ -18,6 +18,7 @@
     <result column="allow_ping" jdbcType="BIT" property="allowPing" />
     <result column="allow_feed" jdbcType="BIT" property="allowFeed" />
     <result column="thumbImg" jdbcType="VARCHAR" property="thumbimg" />
+    <result column="fmtType" jdbcType="VARCHAR" property="fmttype" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="springboot.modal.vo.ContentVo">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -82,7 +83,7 @@
   </sql>
   <sql id="Base_Column_List">
     cid, title, slug, created, modified, author_id, type, status, tags, categories, hits,
-    comments_num, allow_comment, allow_ping, allow_feed, thumbImg
+    comments_num, allow_comment, allow_ping, allow_feed, thumbImg, fmtType
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -135,21 +136,23 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="springboot.modal.vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
+  <insert id="insert" parameterType="springboot.modal.vo.ContentVo">
     insert into t_contents (cid, title, slug,
     created, modified, author_id,
     type, status, tags,
     categories, hits, comments_num,
     allow_comment, allow_ping, allow_feed,
-    thumbImg, content)
+    thumbImg, fmtType, content
+    )
     values (#{cid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{slug,jdbcType=VARCHAR},
     #{created,jdbcType=INTEGER}, #{modified,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER},
     #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR},
     #{categories,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{commentsNum,jdbcType=INTEGER},
     #{allowComment,jdbcType=BIT}, #{allowPing,jdbcType=BIT}, #{allowFeed,jdbcType=BIT},
-    #{thumbimg,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+    #{thumbimg,jdbcType=VARCHAR}, #{fmttype,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+    )
   </insert>
-  <insert id="insertSelective" parameterType="springboot.modal.vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
+  <insert id="insertSelective" parameterType="springboot.modal.vo.ContentVo">
     insert into t_contents
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cid != null">
@@ -199,6 +202,9 @@
       </if>
       <if test="thumbimg != null">
         thumbImg,
+      </if>
+      <if test="fmttype != null">
+        fmtType,
       </if>
       <if test="content != null">
         content,
@@ -252,6 +258,9 @@
       </if>
       <if test="thumbimg != null">
         #{thumbimg,jdbcType=VARCHAR},
+      </if>
+      <if test="fmttype != null">
+        #{fmttype,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -315,6 +324,9 @@
       <if test="record.thumbimg != null">
         thumbImg = #{record.thumbimg,jdbcType=VARCHAR},
       </if>
+      <if test="record.fmttype != null">
+        fmtType = #{record.fmttype,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -341,6 +353,7 @@
     allow_ping = #{record.allowPing,jdbcType=BIT},
     allow_feed = #{record.allowFeed,jdbcType=BIT},
     thumbImg = #{record.thumbimg,jdbcType=VARCHAR},
+    fmtType = #{record.fmttype,jdbcType=VARCHAR},
     content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -363,7 +376,8 @@
     allow_comment = #{record.allowComment,jdbcType=BIT},
     allow_ping = #{record.allowPing,jdbcType=BIT},
     allow_feed = #{record.allowFeed,jdbcType=BIT},
-    thumbImg = #{record.thumbimg,jdbcType=VARCHAR}
+    thumbImg = #{record.thumbimg,jdbcType=VARCHAR},
+    fmtType = #{record.fmttype,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -416,6 +430,9 @@
       <if test="thumbimg != null">
         thumbImg = #{thumbimg,jdbcType=VARCHAR},
       </if>
+      <if test="fmttype != null">
+        fmtType = #{fmttype,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -439,26 +456,28 @@
     allow_ping = #{allowPing,jdbcType=BIT},
     allow_feed = #{allowFeed,jdbcType=BIT},
     thumbImg = #{thumbimg,jdbcType=VARCHAR},
+    fmtType = #{fmttype,jdbcType=VARCHAR},
     content = #{content,jdbcType=LONGVARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="springboot.modal.vo.ContentVo">
     update t_contents
     set title = #{title,jdbcType=VARCHAR},
-    slug = #{slug,jdbcType=VARCHAR},
-    created = #{created,jdbcType=INTEGER},
-    modified = #{modified,jdbcType=INTEGER},
-    author_id = #{authorId,jdbcType=INTEGER},
-    type = #{type,jdbcType=VARCHAR},
-    status = #{status,jdbcType=VARCHAR},
-    tags = #{tags,jdbcType=VARCHAR},
-    categories = #{categories,jdbcType=VARCHAR},
-    hits = #{hits,jdbcType=INTEGER},
-    comments_num = #{commentsNum,jdbcType=INTEGER},
-    allow_comment = #{allowComment,jdbcType=BIT},
-    allow_ping = #{allowPing,jdbcType=BIT},
-    allow_feed = #{allowFeed,jdbcType=BIT},
-    thumbImg = #{thumbimg,jdbcType=VARCHAR}
+      slug = #{slug,jdbcType=VARCHAR},
+      created = #{created,jdbcType=INTEGER},
+      modified = #{modified,jdbcType=INTEGER},
+      author_id = #{authorId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      categories = #{categories,jdbcType=VARCHAR},
+      hits = #{hits,jdbcType=INTEGER},
+      comments_num = #{commentsNum,jdbcType=INTEGER},
+      allow_comment = #{allowComment,jdbcType=BIT},
+      allow_ping = #{allowPing,jdbcType=BIT},
+      allow_feed = #{allowFeed,jdbcType=BIT},
+      thumbImg = #{thumbimg,jdbcType=VARCHAR},
+      fmtType = #{fmttype,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
 

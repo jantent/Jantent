@@ -33,6 +33,8 @@ public class ContentVo {
 
     private String thumbimg;
 
+    private String fmttype;
+
     private String content;
 
     public Integer getCid() {
@@ -161,6 +163,14 @@ public class ContentVo {
 
     public void setThumbimg(String thumbimg) {
         this.thumbimg = thumbimg == null ? null : thumbimg.trim();
+    }
+
+    public String getFmttype() {
+        return fmttype;
+    }
+
+    public void setFmttype(String fmttype) {
+        this.fmttype = fmttype == null ? null : fmttype.trim();
     }
 
     public String getContent() {

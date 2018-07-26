@@ -1,4 +1,4 @@
-var mditor;
+var mditor,htmlEditor;
 var tale = new $.tale();
 var attach_url = $('#attach_url').val();
 // 每10分钟自动保存一次草稿
@@ -8,7 +8,89 @@ Dropzone.autoDiscover = false;
 $(document).ready(function () {
 
     mditor = window.mditor = Mditor.fromTextarea(document.getElementById('md-editor'));
+    // 富文本编辑器
+    htmlEditor = $('.summernote').summernote({
+        lang: 'zh-CN',
+        height: 340,
+        placeholder: '写点儿什么吧...',
+        //上传图片的接口
+        callbacks:{
+            onImageUpload: function(files) {
+                var data=new FormData();
+                data.append('file',files[0]);
+                tale.showLoading();
+                $.ajax({
+                    url: '/admin/attach/upload',     //上传图片请求的路径
+                    method: 'POST',            //方法
+                    data:data,                 //数据
+                    processData: false,        //告诉jQuery不要加工数据
+                    dataType:'json',
+                    contentType: false,        //<code class="javascript comments"> 告诉jQuery,在request head里不要设置Content-Type
+                    success: function(result) {
+                        tale.hideLoading();
+                        if(result && result.success){
+                            var url = $('#attach_url').val() + result.payload[0].fkey;
+                            console.log('url =>' + url);
+                            htmlEditor.summernote('insertImage', url);
+                        } else {
+                            tale.alertError(result.msg || '图片上传失败');
+                        }
+                    }
+                });
+            }
+        }
+    });
 
+    var fmtType = $('#fmtType').val();
+    // 富文本编辑器
+    if (fmtType != 'markdown') {
+        var this_ = $('#switch-btn');
+        mditor.value = '';
+        $('#md-container').hide();
+        $('#html-container').show();
+        this_.text('切换为Markdown编辑器');
+        this_.attr('type', 'texteditor');
+    } else {
+        var this_ = $('#switch-btn');
+        $('#html-container').hide();
+        $('#md-container').show();
+        $('#fmtType').val('markdown');
+        this_.attr('type', 'markdown');
+        this_.text('切换为富文本编辑器');
+        htmlEditor.summernote("code", "");
+    }
+
+    /*
+     * 切换编辑器
+     * */
+    $('#switch-btn').click(function () {
+        var type = $('#fmtType').val();
+        var this_ = $(this);
+        if (type == 'markdown') {
+            // 切换为富文本编辑器
+            if($('#md-container .markdown-body').html().length > 0){
+                $('#html-container .note-editable').empty().html($('#md-container .markdown-body').html());
+                $('#html-container .note-placeholder').hide();
+
+            }
+            mditor.value = '';
+            $('#md-container').hide();
+            $('#html-container').show();
+            this_.text('切换为Markdown编辑器');
+            $('#fmtType').val('html');
+        } else {
+            // 切换为markdown编辑器
+            if($('#html-container .note-editable').html().length > 0){
+                mditor.value = '';
+                mditor.value = toMarkdown($('#html-container .note-editable').html());
+            }
+            $('#html-container').hide();
+            $('#md-container').show();
+            $('#fmtType').val('markdown');
+            this_.text('切换为富文本编辑器');
+            htmlEditor.summernote("code", "");
+        }
+    });
     // Tags Input
     $('#tags').tagsInput({
         width: '100%',
@@ -96,57 +178,6 @@ $(document).ready(function () {
 
 });
 
-var fmtType = $('#fmtType').val();
-// 富文本编辑器
-if (fmtType != 'markdown') {
-    var this_ = $('#switch-btn');
-    mditor.value = '';
-    $('#md-container').hide();
-    $('#html-container').show();
-    this_.text('切换为Markdown编辑器');
-    this_.attr('type', 'texteditor');
-} else {
-    var this_ = $('#switch-btn');
-    $('#html-container').hide();
-    $('#md-container').show();
-    $('#fmtType').val('markdown');
-    this_.attr('type', 'markdown');
-    this_.text('切换为富文本编辑器');
-    htmlEditor.summernote("code", "");
-}
-
-/*
- * 切换编辑器
- * */
-$('#switch-btn').click(function () {
-    var type = $('#fmtType').val();
-    var this_ = $(this);
-    if (type == 'markdown') {
-        // 切换为富文本编辑器
-        if($('#md-container .markdown-body').html().length > 0){
-            $('#html-container .note-editable').empty().html($('#md-container .markdown-body').html());
-            $('#html-container .note-placeholder').hide();
-
-        }
-        mditor.value = '';
-        $('#md-container').hide();
-        $('#html-container').show();
-        this_.text('切换为Markdown编辑器');
-        $('#fmtType').val('html');
-    } else {
-        // 切换为markdown编辑器
-        if($('#html-container .note-editable').html().length > 0){
-            mditor.value = '';
-            mditor.value = toMarkdown($('#html-container .note-editable').html());
-        }
-        $('#html-container').hide();
-        $('#md-container').show();
-        $('#fmtType').val('markdown');
-        this_.text('切换为富文本编辑器');
-        htmlEditor.summernote("code", "");
-    }
-});
-
 /*
  * 自动保存为草稿
  * */
@@ -177,7 +208,7 @@ function  autoSave() {
  */
 function subArticle(status) {
     var title = $('#articleForm input[name=title]').val();
-    var content =  mditor.value;
+    var content = $('#fmtType').val() == 'markdown' ? mditor.value : htmlEditor.summernote('code');
     if (title == '') {
         tale.alertWarn('请输入文章标题');
         return;
