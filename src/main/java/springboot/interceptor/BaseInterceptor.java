@@ -49,6 +49,8 @@ public class BaseInterceptor implements HandlerInterceptor {
         if (null == user) {
             Integer uid = MyUtils.getCooKieUid(request);
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, user);
+        }else {
+            request.getSession().setMaxInactiveInterval(-1);
         }
         // 处理uri
         if (uri.startsWith("/admin") && !uri.startsWith("/admin/login") && null == user) {
@@ -60,7 +62,7 @@ public class BaseInterceptor implements HandlerInterceptor {
         if (request.getMethod().equals("GET")) {
             String csrf_token = UUID.UU64();
             // 默认存储30分钟
-            cache.hset(Types.CSRF_TOKEN.getType(), csrf_token, uri, 30 * 60);
+            cache.hset(Types.CSRF_TOKEN.getType(), csrf_token, uri, 12 * 60 * 60);
             request.setAttribute("_csrf_token", csrf_token);
         }
         return true;
@@ -75,8 +77,8 @@ public class BaseInterceptor implements HandlerInterceptor {
             modelAndView.setViewName("comm/ipban");
         }
 
-        request.setAttribute("commons",commons);
-        request.setAttribute("adminCommons",adminCommons);
+        request.setAttribute("commons", commons);
+        request.setAttribute("adminCommons", adminCommons);
     }
 
     @Override

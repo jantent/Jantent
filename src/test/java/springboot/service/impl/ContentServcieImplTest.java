@@ -25,7 +25,7 @@ public class ContentServcieImplTest {
 
     @Test
     public void  testConten(){
-        PageInfo<ContentVo> contentVoPageInfo =  contentService.getContents(1,5);
-        System.out.println(contentVoPageInfo);
+//        PageInfo<ContentVo> contentVoPageInfo =  contentService.getContents(1,5);
+//        System.out.println(contentVoPageInfo);
     }
 }

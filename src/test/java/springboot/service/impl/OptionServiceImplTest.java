@@ -20,6 +20,6 @@ public class OptionServiceImplTest {
 
     @Test
     public void testInsertOption(){
-        optionService.insertOption(Types.BLOCK_IPS.getType(),"123");
+//        optionService.insertOption(Types.BLOCK_IPS.getType(),"123");
     }
 }

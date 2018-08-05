@@ -1,6 +1,7 @@
 package springboot.service;
 
 import com.github.pagehelper.PageInfo;
+import springboot.exception.TipException;
 import springboot.modal.vo.ContentVo;
 import springboot.modal.vo.ContentVoExample;
 
@@ -14,7 +15,7 @@ public interface IContentService {
      *
      * @param contents
      */
-    void publish(ContentVo contents);
+    int publish(ContentVo contents);
 
     /**
      * 查询文章返回对跳数据
@@ -77,11 +78,11 @@ public interface IContentService {
     void deleteByCid(Integer cid);
 
     /**
-     * 编辑文章
+     * 更新文章
      *
      * @param contents
      */
-    void updateArticle(ContentVo contents);
+    int updateArticle(ContentVo contents);
 
 
     /**
@@ -91,4 +92,11 @@ public interface IContentService {
      * @param newCatefory
      */
     void updateCategory(String ordinal, String newCatefory);
+
+    /**
+     * 自动保存文章
+     *
+     * @param contents
+     */
+    Integer autoSaveContent(ContentVo contents) throws TipException;
 }

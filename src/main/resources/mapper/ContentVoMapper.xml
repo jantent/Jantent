@@ -136,7 +136,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="springboot.modal.vo.ContentVo">
+  <insert id="insert" parameterType="springboot.modal.vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
     insert into t_contents (cid, title, slug,
     created, modified, author_id,
     type, status, tags,
@@ -152,7 +152,7 @@
     #{thumbimg,jdbcType=VARCHAR}, #{fmttype,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
     )
   </insert>
-  <insert id="insertSelective" parameterType="springboot.modal.vo.ContentVo">
+  <insert id="insertSelective" parameterType="springboot.modal.vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
     insert into t_contents
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cid != null">
@@ -382,7 +382,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="springboot.modal.vo.ContentVo">
+  <update id="updateByPrimaryKeySelective" parameterType="springboot.modal.vo.ContentVo" keyProperty="cid">
     update t_contents
     <set>
       <if test="title != null">

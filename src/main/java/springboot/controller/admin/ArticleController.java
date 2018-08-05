@@ -68,20 +68,6 @@ public class ArticleController extends AbstractController {
     }
 
     /**
-     * 文章发表页面
-     *
-     * @param request
-     * @return
-     */
-    @GetMapping(value = "/publish")
-    public String newArticle(HttpServletRequest request) {
-        List<MetaVo> categories = metaService.getMetas(Types.CATEGORY.getType());
-        request.setAttribute("categories", categories);
-        request.setAttribute(Types.ATTACH_URL.getType(), Commons.site_option(Types.ATTACH_URL.getType()));
-        return "admin/article_edit";
-    }
-
-    /**
      * 文章编辑页面
      *
      * @param cid
@@ -98,6 +84,21 @@ public class ArticleController extends AbstractController {
         request.setAttribute("active", "article");
         return "admin/article_edit";
     }
+
+    /**
+     * 文章发表页面
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping(value = "/publish")
+    public String newArticle(HttpServletRequest request) {
+        List<MetaVo> categories = metaService.getMetas(Types.CATEGORY.getType());
+        request.setAttribute("categories", categories);
+        request.setAttribute(Types.ATTACH_URL.getType(), Commons.site_option(Types.ATTACH_URL.getType()));
+        return "admin/article_edit";
+    }
+
 
     /**
      * 文章发表 post
@@ -146,6 +147,27 @@ public class ArticleController extends AbstractController {
             return ExceptionHelper.handlerException(logger, msg, e);
         }
         return RestResponseBo.ok();
+    }
+
+    @PostMapping(value = "/autoSave")
+    @ResponseBody
+    @Transactional(rollbackFor = TipException.class)
+    public RestResponseBo autoSave(ContentVo contents, HttpServletRequest request) {
+        int cid;
+        UserVo users = this.user(request);
+        contents.setAuthorId(users.getUid());
+        contents.setType(Types.ARTICLE.getType());
+        if (StringUtils.isBlank(contents.getCategories())) {
+            contents.setCategories("默认分类");
+        }
+        // 判断是否存在数据库中，如果不存在，则新增，如果存在则更新
+        try {
+            cid = contentService.autoSaveContent(contents);
+        } catch (Exception e) {
+            String msg = "自动保存文章失败";
+            return ExceptionHelper.handlerException(logger, msg, e);
+        }
+        return new RestResponseBo(true, cid);
     }
 
     /**

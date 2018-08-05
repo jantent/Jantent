@@ -52,12 +52,12 @@ public class RedisServiceTest {
 
     @Test
     public void test(){
-        Context context = new Context();
-        PageInfo<ContentVo> articles = contentService.getContents(1, 10);
-        List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
-        context.setVariable("categories", categories);
-        context.setVariable("articles", articles);
-        String html = templateEngine.process("themes/jantent/index",context);
-        System.out.println(html);
+//        Context context = new Context();
+//        PageInfo<ContentVo> articles = contentService.getContents(1, 10);
+//        List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
+//        context.setVariable("categories", categories);
+//        context.setVariable("articles", articles);
+//        String html = templateEngine.process("themes/jantent/index",context);
+//        System.out.println(html);
     }
 }

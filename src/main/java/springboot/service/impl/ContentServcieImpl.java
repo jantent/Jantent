@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import springboot.constant.WebConst;
 import springboot.dao.ContentVoMapper;
 import springboot.dao.MetaVoMapper;
 import springboot.dto.Types;
@@ -51,13 +50,13 @@ public class ContentServcieImpl implements IContentService {
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private ValueOperations<String,Object> valueOperations;
+    private ValueOperations<String, Object> valueOperations;
 
     @Autowired
     private RedisService redisService;
 
     @Override
-    public void publish(ContentVo contents) {
+    public int publish(ContentVo contents) {
         checkContent(contents);
         if (StringUtils.isNotBlank(contents.getSlug())) {
             if (contents.getSlug().length() < 5) {
@@ -89,9 +88,12 @@ public class ContentServcieImpl implements IContentService {
         String tags = contents.getTags();
         String categories = contents.getCategories();
         Integer cid = contents.getCid();
-
+        // 保存
         metasService.saveMetas(cid, tags, Types.TAG.getType());
         metasService.saveMetas(cid, categories, Types.CATEGORY.getType());
+
+        // 返回新增文章的cid
+        return cid;
     }
 
     @Override
@@ -110,7 +112,7 @@ public class ContentServcieImpl implements IContentService {
         // 先从redis中读取文章信息
         String contentKey = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, id);
         ContentVo contentVo = (ContentVo) valueOperations.get(contentKey);
-        if (contentVo == null){
+        if (contentVo == null) {
             if (StringUtils.isNotBlank(id)) {
                 if (Tools.isNumber(id)) {
                     contentVo = contentDao.selectByPrimaryKey(Integer.valueOf(id));
@@ -127,8 +129,8 @@ public class ContentServcieImpl implements IContentService {
                         throw new TipException("query content by id and return is not one");
                     }
                     contentVo = contentVos.get(0);
-                    valueOperations.set(contentKey,contentVo);
-                    redisService.expireKey(contentKey,ContentKey.LIVE_TIME, TimeUnit.HOURS);
+                    valueOperations.set(contentKey, contentVo);
+                    redisService.expireKey(contentKey, ContentKey.LIVE_TIME, TimeUnit.HOURS);
                     return contentVo;
                 }
             }
@@ -183,7 +185,7 @@ public class ContentServcieImpl implements IContentService {
     }
 
     @Override
-    public void updateArticle(ContentVo contents) {
+    public int updateArticle(ContentVo contents) {
         // 检查文章输入
         checkContent(contents);
         if (StringUtils.isBlank(contents.getSlug())) {
@@ -194,14 +196,20 @@ public class ContentServcieImpl implements IContentService {
         Integer cid = contents.getCid();
         contents.setContent(EmojiParser.parseToAliases(contents.getContent()));
 
-        contentDao.updateByPrimaryKeySelective(contents);
+        ContentVoExample contentVoExample = new ContentVoExample();
+        contentVoExample.createCriteria().andTypeEqualTo(contents.getType()).andSlugEqualTo(contents.getSlug());
+        contentDao.updateByExampleSelective(contents, contentVoExample);
         // 更新缓存
-        String contentKey  = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, contents.getSlug());
+        String contentKey = RedisKeyUtil.getKey(ContentKey.TABLE_NAME, ContentKey.MAJOR_KEY, contents.getSlug());
         redisService.deleteKey(contentKey);
 
-        relationshipService.deleteById(cid, null);
-        metasService.saveMetas(cid, contents.getTags(), Types.TAG.getType());
-        metasService.saveMetas(cid, contents.getCategories(), Types.CATEGORY.getType());
+        // 试用于自动保存，如果CID等于NULL，则不更新项目分类
+        if (cid != null) {
+            relationshipService.deleteById(cid, null);
+            metasService.saveMetas(cid, contents.getTags(), Types.TAG.getType());
+            metasService.saveMetas(cid, contents.getCategories(), Types.CATEGORY.getType());
+        }
+        return cid;
     }
 
     @Override
@@ -213,7 +221,7 @@ public class ContentServcieImpl implements IContentService {
         contentDao.updateByExampleSelective(contentVo, example);
     }
 
-    private void  checkContent(ContentVo contents) throws TipException{
+    private void checkContent(ContentVo contents) throws TipException {
         if (null == contents) {
             throw new TipException("文章对象不能为空");
         }
@@ -232,5 +240,23 @@ public class ContentServcieImpl implements IContentService {
         if (null == contents.getAuthorId()) {
             throw new TipException("请登录后发布文章");
         }
+    }
+
+    @Override
+    public Integer autoSaveContent(ContentVo contents) throws TipException {
+        // 当文章地址不为空时
+        if (StringUtils.isNotBlank(contents.getSlug())) {
+            Integer cid = null;
+            ContentVoExample contentVoExample = new ContentVoExample();
+            contentVoExample.createCriteria().andTypeEqualTo(contents.getType()).andSlugEqualTo(contents.getSlug());
+            long count = contentDao.countByExample(contentVoExample);
+            if (count > 0) {
+                cid = updateArticle(contents);
+            } else {
+                cid = publish(contents);
+            }
+            return cid;
+        }
+        return null;
     }
 }
