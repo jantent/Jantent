@@ -1,10 +1,15 @@
 
 -- 创建数据库
 create database `jantent` default character set utf8 collate utf8_general_ci;
+codesearch
 
 use jantent;
 
 DROP TABLE IF EXISTS `t_logs`;
+
+CREATE table REPO(
+
+)
 
 CREATE TABLE `t_logs` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT ,
