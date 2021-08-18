@@ -2,7 +2,7 @@ package springboot.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
+@Service
 public class RedisService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
